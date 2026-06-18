@@ -1,0 +1,531 @@
+<main style="padding-bottom:80px">
+
+<!-- LOGIN SCREEN -->
+<div id="portalLogin" style="min-height:85vh;display:flex;align-items:center;justify-content:center">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:24px;padding:52px;width:100%;max-width:440px;text-align:center">
+    <div style="width:64px;height:64px;background:linear-gradient(135deg,var(--teal),var(--teal-d));border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px">👤</div>
+    <div class="eyebrow">DDC Корпоративный портал</div>
+    <h2 style="font-family:'Manrope',sans-serif;font-size:26px;font-weight:900;margin-bottom:8px">Личный кабинет</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:28px">Войдите, чтобы увидеть свой профиль, коллег и обучение</p>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px">
+        <button onclick="quickLogin(0)" style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);border-radius:10px;padding:10px;cursor:pointer;font-size:12px;color:var(--text)">
+          <div style="font-weight:700">Алибек С.</div><div style="font-size:10px;color:var(--muted)">Head of SOC</div>
+        </button>
+        <button onclick="quickLogin(1)" style="background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.25);border-radius:10px;padding:10px;cursor:pointer;font-size:12px;color:var(--text)">
+          <div style="font-weight:700">Мадина Ж.</div><div style="font-size:10px;color:var(--muted)">AI Engineer</div>
+        </button>
+        <button onclick="quickLogin(2)" style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.25);border-radius:10px;padding:10px;cursor:pointer;font-size:12px;color:var(--text)">
+          <div style="font-weight:700">Данияр А.</div><div style="font-size:10px;color:var(--muted)">Backend Dev</div>
+        </button>
+        <button onclick="quickLogin(5)" style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.25);border-radius:10px;padding:10px;cursor:pointer;font-size:12px;color:var(--text)">
+          <div style="font-weight:700">Зауре С.</div><div style="font-size:10px;color:var(--muted)">FinTech Lead</div>
+        </button>
+      </div>
+      <p style="font-size:11px;color:var(--dim)">Выберите профиль для входа</p>
+    </div>
+  </div>
+</div>
+
+<!-- PORTAL CONTENT -->
+<div id="portalContent" style="display:none">
+
+<!-- Top bar -->
+<div style="background:linear-gradient(135deg,rgba(0,169,143,0.07),rgba(96,165,250,0.04));border-bottom:1px solid var(--border);padding:16px 0">
+  <div style="max-width:1280px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div id="portalAvatar" style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--teal),var(--teal-d));display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff"></div>
+      <div>
+        <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:17px" id="portalName">—</div>
+        <div style="font-size:12px;color:var(--muted)" id="portalRole">—</div>
+      </div>
+    </div>
+    <nav style="display:flex;gap:6px;flex-wrap:wrap">
+      <button onclick="showTab('my')" class="ptab active" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:rgba(0,169,143,0.12);color:var(--teal-l);cursor:pointer">👤 Мой профиль</button>
+      <button onclick="showTab('team')" class="ptab" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">👥 Коллеги</button>
+      <button onclick="showTab('learn')" class="ptab" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">📚 Обучение</button>
+      <button onclick="showTab('org')" class="ptab" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">📊 Структура</button>
+      <button onclick="showTab('board')" class="ptab" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">🏛️ Совет директоров</button>
+      <button onclick="doLogout()" style="padding:8px 16px;border-radius:8px;font-size:13px;border:1px solid rgba(248,113,113,0.25);background:transparent;color:#f87171;cursor:pointer">Выйти</button>
+    </nav>
+  </div>
+</div>
+
+<div style="max-width:1280px;margin:0 auto;padding:32px 48px">
+
+<!-- ═══ TAB: МОЙ ПРОФИЛЬ ═══ -->
+<div id="tab-my">
+  <div style="display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start">
+
+    <!-- Profile card left -->
+    <div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;text-align:center;margin-bottom:20px">
+        <div id="pcAvatar" style="width:80px;height:80px;border-radius:22px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:900;font-size:26px;color:#fff"></div>
+        <div style="font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px" id="pcName">—</div>
+        <div style="font-size:13px;color:var(--teal-l);font-weight:600;margin-bottom:4px" id="pcRole">—</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px" id="pcEdu">—</div>
+        <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap" id="pcCerts"></div>
+      </div>
+      <!-- Stats -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;color:var(--teal-l)" id="pcExp">—</div>
+          <div style="font-size:11px;color:var(--muted)">Опыт</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;color:#a78bfa" id="pcProjCount">0</div>
+          <div style="font-size:11px;color:var(--muted)">Проектов</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;color:#fbbf24" id="pcCertCount">0</div>
+          <div style="font-size:11px;color:var(--muted)">Сертификатов</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;color:#4ade80">⭐ 4.9</div>
+          <div style="font-size:11px;color:var(--muted)">Рейтинг</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <!-- My Projects -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px">
+        <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px">📁 Мои проекты</div>
+        <div id="pcProjects" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+
+      <!-- Activity / Timeline -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px">
+        <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px">📅 Последняя активность</div>
+        <div id="pcActivity" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+
+      <!-- Skills radarchart substitute (bars) -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px">
+        <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px">💡 Компетенции</div>
+        <div id="pcSkills" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: КОЛЛЕГИ ═══ -->
+<div id="tab-team" style="display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="eyebrow">Команда DDC</div>
+      <h2 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800">Коллеги</h2>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap" id="deptFilters"></div>
+  </div>
+  <div id="colleaguesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px"></div>
+</div>
+
+<!-- ═══ TAB: ОБУЧЕНИЕ ═══ -->
+<div id="tab-learn" style="display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="eyebrow">Корпоративное обучение</div>
+      <h2 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800">Центр знаний и развития</h2>
+    </div>
+    <div style="background:rgba(0,169,143,0.08);border:1px solid rgba(0,169,143,0.2);border-radius:12px;padding:10px 20px;text-align:center">
+      <div style="font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;color:var(--teal-l)" id="learnProgress">3/9</div>
+      <div style="font-size:11px;color:var(--muted)">Пройдено</div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:24px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <span style="font-size:13px;font-weight:600">Прогресс обучения</span>
+      <span style="font-size:13px;color:var(--teal-l)" id="learnPct">33%</span>
+    </div>
+    <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden">
+      <div id="learnBar" style="height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-l));border-radius:4px;transition:width 1s ease;width:33%"></div>
+    </div>
+  </div>
+
+  <div id="learningGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px"></div>
+</div>
+
+<!-- ═══ TAB: СТРУКТУРА ═══ -->
+<div id="tab-org" style="display:none">
+  <div style="margin-bottom:24px">
+    <div class="eyebrow">Организационная структура</div>
+    <h2 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px">АО «ЦЦР НБ РК»</h2>
+    <p style="font-size:13px;color:var(--muted)">Нажмите на отдел, чтобы увидеть сотрудников</p>
+  </div>
+
+  <!-- Org tree -->
+  <div style="overflow-x:auto;padding-bottom:20px">
+    <div style="min-width:900px">
+      <!-- CEO level -->
+      <div style="display:flex;justify-content:center;margin-bottom:0">
+        <div onclick="filterOrgDept('all')" style="background:linear-gradient(135deg,rgba(0,169,143,0.15),rgba(0,169,143,0.08));border:2px solid var(--teal);border-radius:14px;padding:16px 28px;text-align:center;cursor:pointer;min-width:220px">
+          <div style="font-size:24px;margin-bottom:4px">🏛️</div>
+          <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:14px">Председатель Правления</div>
+          <div style="font-size:12px;color:var(--teal-l);font-weight:600;margin-top:4px">Амардинов М.А.</div>
+        </div>
+      </div>
+      <!-- connector line -->
+      <div style="width:2px;height:32px;background:var(--border);margin:0 auto"></div>
+      <!-- Departments row -->
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative">
+        <div style="position:absolute;top:0;left:10%;width:80%;height:2px;background:var(--border)"></div>
+        <div onclick="filterOrgDept('cyber')" class="org-dept-box" style="background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.3);border-radius:12px;padding:14px;text-align:center;cursor:pointer;margin-top:2px;transition:all .2s" onmouseover="this.style.background='rgba(248,113,113,0.14)'" onmouseout="this.style.background='rgba(248,113,113,0.07)'">
+          <div style="font-size:22px">🛡️</div>
+          <div style="font-size:12px;font-weight:700;margin-top:6px">Кибербезопасность</div>
+          <div style="font-size:11px;color:var(--muted)">SOC / CISO</div>
+          <div style="font-size:11px;color:#f87171;font-weight:700;margin-top:4px">3 сотр.</div>
+        </div>
+        <div onclick="filterOrgDept('ai')" class="org-dept-box" style="background:rgba(96,165,250,0.07);border:1px solid rgba(96,165,250,0.3);border-radius:12px;padding:14px;text-align:center;cursor:pointer;margin-top:2px;transition:all .2s" onmouseover="this.style.background='rgba(96,165,250,0.14)'" onmouseout="this.style.background='rgba(96,165,250,0.07)'">
+          <div style="font-size:22px">🤖</div>
+          <div style="font-size:12px;font-weight:700;margin-top:6px">AI Lab</div>
+          <div style="font-size:11px;color:var(--muted)">ML / NLP / CV</div>
+          <div style="font-size:11px;color:#60a5fa;font-weight:700;margin-top:4px">2 сотр.</div>
+        </div>
+        <div onclick="filterOrgDept('dev')" class="org-dept-box" style="background:rgba(167,139,250,0.07);border:1px solid rgba(167,139,250,0.3);border-radius:12px;padding:14px;text-align:center;cursor:pointer;margin-top:2px;transition:all .2s" onmouseover="this.style.background='rgba(167,139,250,0.14)'" onmouseout="this.style.background='rgba(167,139,250,0.07)'">
+          <div style="font-size:22px">💻</div>
+          <div style="font-size:12px;font-weight:700;margin-top:6px">Разработка</div>
+          <div style="font-size:11px;color:var(--muted)">Backend / Frontend</div>
+          <div style="font-size:11px;color:#a78bfa;font-weight:700;margin-top:4px">2 сотр.</div>
+        </div>
+        <div onclick="filterOrgDept('data')" class="org-dept-box" style="background:rgba(0,169,143,0.07);border:1px solid rgba(0,169,143,0.3);border-radius:12px;padding:14px;text-align:center;cursor:pointer;margin-top:2px;transition:all .2s" onmouseover="this.style.background='rgba(0,169,143,0.14)'" onmouseout="this.style.background='rgba(0,169,143,0.07)'">
+          <div style="font-size:22px">📊</div>
+          <div style="font-size:12px;font-weight:700;margin-top:6px">Data</div>
+          <div style="font-size:11px;color:var(--muted)">DataEng / DS</div>
+          <div style="font-size:11px;color:var(--teal-l);font-weight:700;margin-top:4px">2 сотр.</div>
+        </div>
+        <div onclick="filterOrgDept('fintech')" class="org-dept-box" style="background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:14px;text-align:center;cursor:pointer;margin-top:2px;transition:all .2s" onmouseover="this.style.background='rgba(52,211,153,0.14)'" onmouseout="this.style.background='rgba(52,211,153,0.07)'">
+          <div style="font-size:22px">💳</div>
+          <div style="font-size:12px;font-weight:700;margin-top:6px">FinTech</div>
+          <div style="font-size:11px;color:var(--muted)">Digital Tenge</div>
+          <div style="font-size:11px;color:#34d399;font-weight:700;margin-top:4px">1 сотр.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtered employees -->
+  <div style="margin-top:28px">
+    <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px" id="orgFilterLabel">Все сотрудники</div>
+    <div id="orgEmpGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px"></div>
+  </div>
+</div>
+
+<!-- ═══ TAB: СОВЕТ ДИРЕКТОРОВ ═══ -->
+<div id="tab-board" style="display:none">
+  <div style="margin-bottom:28px">
+    <div class="eyebrow">Корпоративное управление</div>
+    <h2 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">Совет директоров</h2>
+    <p style="font-size:13px;color:var(--muted)">АО «Цифровой центр развития Национального Банка Казахстана»</p>
+  </div>
+
+  <!-- Board members -->
+  <div style="display:flex;flex-direction:column;gap:16px" id="boardGrid"></div>
+
+  <!-- Management board -->
+  <div style="margin-top:36px">
+    <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px">
+      ⚙️ Правление (Исполнительный орган)
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px" id="mgmtGrid"></div>
+  </div>
+
+  <!-- Key facts -->
+  <div style="margin-top:36px;background:rgba(0,169,143,0.05);border:1px solid rgba(0,169,143,0.15);border-radius:16px;padding:24px">
+    <div style="font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:16px">📋 Ключевые факты об организации</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px">
+      <div><div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Полное название</div><div style="font-size:13px">АО «Центр цифрового развития Национального Банка Казахстана»</div></div>
+      <div><div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Реорганизация</div><div style="font-size:13px">17 июля 2025 г.</div></div>
+      <div><div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Основано</div><div style="font-size:13px">1995 год (как АО «БСБ НБ РК»)</div></div>
+      <div><div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Акционер</div><div style="font-size:13px">Национальный Банк РК (100%)</div></div>
+      <div><div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Адрес</div><div style="font-size:13px">г. Астана, пр. Мангилик Ел, 57А</div></div>
+      <div><div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Сайт</div><div style="font-size:13px"><a href="https://www.ddcnb.kz" target="_blank" style="color:var(--teal-l)">www.ddcnb.kz</a></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+</div><!-- /portalContent -->
+</main>
+
+<script>
+// ═══════════════════════════════════════════════
+//  EMPLOYEE PORTAL — DDC
+// ═══════════════════════════════════════════════
+
+const DEPT_COLOR = {
+  cyber:{bg:'rgba(248,113,113,0.15)',c:'#f87171'},
+  ai:{bg:'rgba(96,165,250,0.15)',c:'#60a5fa'},
+  dev:{bg:'rgba(167,139,250,0.15)',c:'#a78bfa'},
+  data:{bg:'rgba(0,169,143,0.15)',c:'#33c4aa'},
+  cloud:{bg:'rgba(251,191,36,0.15)',c:'#fbbf24'},
+  fintech:{bg:'rgba(52,211,153,0.15)',c:'#34d399'},
+};
+
+const DEPT_LABEL = {cyber:'Кибербезопасность',ai:'AI Lab',dev:'Разработка',data:'Data',cloud:'Cloud/DevOps',fintech:'FinTech'};
+
+// Skills per dept
+const DEPT_SKILLS = {
+  cyber:[{n:'Threat Detection',v:96},{n:'Incident Response',v:91},{n:'SIEM/SOAR',v:88},{n:'Forensics',v:80},{n:'Red Team',v:74}],
+  ai:[{n:'Machine Learning',v:95},{n:'Deep Learning',v:90},{n:'NLP',v:88},{n:'Computer Vision',v:82},{n:'MLOps',v:76}],
+  dev:[{n:'Backend Dev',v:93},{n:'API Design',v:88},{n:'Databases',v:85},{n:'Microservices',v:80},{n:'CI/CD',v:72}],
+  data:[{n:'Data Engineering',v:92},{n:'SQL/NoSQL',v:88},{n:'Spark/Kafka',v:85},{n:'Visualization',v:78},{n:'ML Basics',v:70}],
+  cloud:[{n:'Kubernetes',v:94},{n:'Terraform',v:90},{n:'CI/CD',v:88},{n:'Monitoring',v:82},{n:'Security',v:78}],
+  fintech:[{n:'Payment Systems',v:96},{n:'PCI DSS',v:94},{n:'CBDC',v:90},{n:'Open Banking',v:88},{n:'Cryptography',v:82}],
+};
+
+// Activity per dept
+const DEPT_ACTIVITY = {
+  cyber:['✅ Завершил инцидент INC-2847 — DDoS атака отражена','📋 Обновил runbook для ransomware реагирования','🔍 Threat hunting: обнаружены подозрительные IoC','📊 Составил еженедельный отчёт по угрозам'],
+  ai:['🤖 Улучшил BERT-kz: точность +2.3%','📚 Завершил курс LangChain & RAG','🔬 Провёл A/B тест новой anomaly detection модели','🚀 Задеплоил Computer Vision модель в staging'],
+  dev:['💻 Смержил PR #247: Open Banking v2.1','⚡ Оптимизировал запросы к Digital Tenge БД (-40% latency)','🔧 Исправил критический баг в auth-service','📝 Написал unit-тесты для payment-gateway'],
+  data:['📊 Обновил Data Pipeline для новых источников','🔄 Запустил ежедневный ETL процесс','📈 Подготовил дашборд для НБ РК','💾 Оптимизировал партиционирование ClickHouse'],
+  cloud:['☁️ Мигрировал 3 сервиса на K8s','🔒 Обновил политики RBAC для кластера','🚀 Настроил ArgoCD для нового сервиса','📊 Обновил Grafana дашборды алертинга'],
+  fintech:['💳 Протестировал новые сценарии Digital Tenge','🔐 Прошёл ежегодный аудит PCI DSS','📋 Обновил документацию Open Banking API','🌐 Интегрировал нового банка-партнёра'],
+};
+
+// Learning materials
+const LEARNING_TRACKS = [
+  {id:'track1',icon:'🛡️',title:'Кибербезопасность: SOC Analyst L2→L3',type:'Курс',color:'#f87171',bg:'rgba(248,113,113,0.08)',duration:'24 часа',modules:8,dept:'cyber',desc:'SIEM, Threat Hunting, MITRE ATT&CK, Incident Response. Подготовка к GREM/GCFE.'},
+  {id:'track2',icon:'🤖',title:'Machine Learning для финтеха',type:'Курс',color:'#60a5fa',bg:'rgba(96,165,250,0.08)',duration:'36 часов',modules:12,dept:'ai',desc:'Anomaly detection, Credit scoring, NLP для финансовых документов.'},
+  {id:'track3',icon:'💎',title:'Digital Tenge: архитектура и разработка',type:'Вебинар',color:'#34d399',bg:'rgba(52,211,153,0.08)',duration:'4 часа',modules:1,dept:'fintech',desc:'Техническое устройство CBDC, API, ISO 20022, PCI DSS Level 1.'},
+  {id:'track4',icon:'☁️',title:'Kubernetes CKA подготовка',type:'Курс',color:'#fbbf24',bg:'rgba(251,191,36,0.08)',duration:'40 часов',modules:15,dept:'cloud',desc:'Архитектура K8s, Security, Networking, Storage. Подготовка к сертификации CKA.'},
+  {id:'track5',icon:'📊',title:'Apache Kafka и Spark Streaming',type:'Мастер-класс',color:'#a78bfa',bg:'rgba(167,139,250,0.08)',duration:'12 часов',modules:4,dept:'data',desc:'Stream processing, Event-driven архитектура, интеграция с ClickHouse.'},
+  {id:'track6',icon:'🔐',title:'PCI DSS для разработчиков',type:'Обязательный',color:'#f97316',bg:'rgba(249,115,22,0.08)',duration:'6 часов',modules:3,dept:'fintech',desc:'Требования PCI DSS Level 1. Обязательно для всех сотрудников FinTech команды.'},
+  {id:'track7',icon:'🧠',title:'Казахский язык: технический уровень',type:'Языковой',color:'#4ade80',bg:'rgba(74,222,128,0.08)',duration:'20 часов',modules:10,dept:'all',desc:'Деловая переписка и техническая документация на казахском языке.'},
+  {id:'track8',icon:'🎯',title:'MITRE ATT&CK для аналитиков',type:'Воркшоп',color:'#f87171',bg:'rgba(248,113,113,0.06)',duration:'8 часов',modules:3,dept:'cyber',desc:'Практика работы с матрицей ATT&CK, детектирование техник, создание detection rules.'},
+  {id:'track9',icon:'📡',title:'Open Banking API: интеграция и стандарты',type:'Документация',color:'#60a5fa',bg:'rgba(96,165,250,0.06)',duration:'5 часов',modules:2,dept:'dev',desc:'ISO 20022, OAuth 2.0, OpenAPI 3.0. Гид по интеграции с платформой DDC.'},
+];
+
+const BOARD_MEMBERS = [
+  {initials:'ЖБМ',name:'Жаленов Бинур Муратович',role:'Председатель Совета директоров',title:'Заместитель Председателя НБ РК',tags:['MBA — New York University','FinTech — Cambridge','Стипендиат «Болашак»'],bio:'Окончил ЕНУ им. Гумилёва по специальности «вычислительная техника». Ранее возглавлял Центр развития платёжных технологий, был генеральным директором КЦМР, председателем НПК. С 2024 — руководитель цифровой трансформации НБ РК.',color:'#fbbf24',isChairman:true},
+  {initials:'УАА',name:'Узбеков Асхат Архатович',role:'Член Совета директоров',title:'Директор Департамента ИТ НБ РК',tags:['IT НБ РК'],bio:'Руководит всей ИТ-инфраструктурой Национального Банка Республики Казахстан.',color:'#60a5fa'},
+  {initials:'БДС',name:'Бейсекова Динара Серікқызы',role:'Член Совета директоров',title:'Директор юридического департамента НБ РК',tags:['Право','Корпоративное управление'],bio:'Отвечает за правовое сопровождение деятельности ЦЦР и корпоративное управление.',color:'#a78bfa'},
+  {initials:'НМА',name:'Нурмагамбетов Марат Аманович',role:'Независимый директор',title:'Эксперт по цифровой трансформации',tags:['Independent','FinTech Expert'],bio:'Независимый директор с международным опытом в сфере финансовых технологий.',color:'#34d399'},
+];
+
+const MGMT_MEMBERS = [
+  {initials:'АМА',name:'Амардинов Малик Алимжанович',role:'Председатель Правления',title:'CEO АО «ЦЦР НБ РК»',color:'#00A98F'},
+  {initials:'КАБ',name:'Кенжебаев Асыл Бахтиярович',role:'Заместитель Председателя Правления',title:'COO — Операционная деятельность',color:'#60a5fa'},
+  {initials:'МСН',name:'Мухамедиев Серик Нурланович',role:'Директор по технологиям',title:'CTO — Разработка и инфраструктура',color:'#a78bfa'},
+  {initials:'ДСА',name:'Дуйсенова Салтанат Абаевна',role:'Директор по кибербезопасности',title:'CISO — Информационная безопасность',color:'#f87171'},
+];
+
+let currentEmployee = null;
+let learnedItems = JSON.parse(localStorage.getItem('ddc_learn')||'[]');
+let orgFilter = 'all';
+
+function quickLogin(idx) {
+  const emp = EMPLOYEES[idx];
+  currentEmployee = emp;
+  document.getElementById('portalLogin').style.display='none';
+  document.getElementById('portalContent').style.display='block';
+  // Set topbar
+  document.getElementById('portalAvatar').textContent = emp.initials;
+  document.getElementById('portalName').textContent = emp.name;
+  document.getElementById('portalRole').textContent = emp.role.ru;
+  renderMyProfile();
+  showTab('my');
+}
+
+function doLogout() {
+  document.getElementById('portalContent').style.display='none';
+  document.getElementById('portalLogin').style.display='flex';
+}
+
+function showTab(tab) {
+  ['my','team','learn','org','board'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t===tab?'block':'none';
+  });
+  document.querySelectorAll('.ptab').forEach((b,i) => {
+    const tabs=['my','team','learn','org','board'];
+    b.style.background = tabs[i]===tab?'rgba(0,169,143,0.12)':'transparent';
+    b.style.color = tabs[i]===tab?'var(--teal-l)':'var(--muted)';
+  });
+  if(tab==='team') renderColleagues('all');
+  if(tab==='learn') renderLearning();
+  if(tab==='org') renderOrgEmp('all');
+  if(tab==='board') renderBoard();
+}
+
+function renderMyProfile() {
+  const emp = currentEmployee;
+  if(!emp) return;
+  const dc = DEPT_COLOR[emp.dept] || {bg:'rgba(0,169,143,0.15)',c:'var(--teal-l)'};
+  // Avatar
+  ['pcAvatar','portalAvatar'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) { el.textContent=emp.initials; el.style.background=`linear-gradient(135deg,${dc.c}cc,${dc.c}88)`; }
+  });
+  document.getElementById('pcName').textContent = emp.name;
+  document.getElementById('pcRole').textContent = emp.role.ru;
+  document.getElementById('pcEdu').textContent = emp.edu;
+  document.getElementById('pcExp').textContent = emp.exp.ru.replace(' лет в ',' лет\n').split('\n')[0];
+  document.getElementById('pcProjCount').textContent = emp.projects.ru.length;
+  document.getElementById('pcCertCount').textContent = emp.certs.length;
+  // Certs
+  document.getElementById('pcCerts').innerHTML = emp.certs.map(c=>`<span style="background:rgba(0,169,143,0.1);border:1px solid rgba(0,169,143,0.25);color:var(--teal-l);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600">${c}</span>`).join('');
+  // Projects
+  document.getElementById('pcProjects').innerHTML = emp.projects.ru.map(p=>`
+    <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:12px 14px">
+      <span style="font-size:20px">📁</span>
+      <div><div style="font-size:13px;font-weight:600">${p}</div><div style="font-size:11px;color:var(--dim)">Активный участник</div></div>
+      <span style="margin-left:auto;background:rgba(74,222,128,0.1);color:#4ade80;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700">Active</span>
+    </div>`).join('');
+  // Activity
+  const acts = DEPT_ACTIVITY[emp.dept] || [];
+  document.getElementById('pcActivity').innerHTML = acts.map(a=>`<div style="font-size:13px;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:8px;border-left:2px solid ${dc.c}">${a}</div>`).join('');
+  // Skills
+  const skills = DEPT_SKILLS[emp.dept] || [];
+  document.getElementById('pcSkills').innerHTML = skills.map(s=>`
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:120px;font-size:12px;color:var(--muted)">${s.n}</div>
+      <div style="flex:1;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden">
+        <div style="height:100%;width:${s.v}%;background:linear-gradient(90deg,${dc.c}88,${dc.c});border-radius:4px"></div>
+      </div>
+      <div style="width:28px;font-size:12px;font-weight:700;color:${dc.c};text-align:right">${s.v}</div>
+    </div>`).join('');
+}
+
+function renderColleagues(filter) {
+  orgFilter = filter;
+  const list = filter==='all' ? EMPLOYEES : EMPLOYEES.filter(e=>e.dept===filter);
+  const grid = document.getElementById('colleaguesGrid');
+  if(!grid) return;
+  grid.innerHTML = list.map(emp => {
+    const dc = DEPT_COLOR[emp.dept] || {bg:'rgba(0,169,143,0.15)',c:'var(--teal-l)'};
+    const isMe = emp===currentEmployee;
+    return `<div style="background:var(--card);border:1px solid ${isMe?'var(--teal)':'var(--border)'};border-radius:16px;padding:20px;${isMe?'box-shadow:0 0 0 1px rgba(0,169,143,0.3)':''}">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+        <div style="width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,${dc.c}cc,${dc.c}66);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;color:#fff;flex-shrink:0">${emp.initials}</div>
+        <div>
+          <div style="font-size:14px;font-weight:700">${emp.name}${isMe?' <span style="font-size:10px;background:rgba(0,169,143,0.15);color:var(--teal-l);border-radius:4px;padding:2px 6px">Вы</span>':''}</div>
+          <div style="font-size:12px;color:${dc.c}">${emp.role.ru}</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px">${emp.exp.ru} · ${emp.edu}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">
+        ${emp.certs.map(c=>`<span style="background:${dc.bg};color:${dc.c};border-radius:5px;padding:3px 7px;font-size:10px;font-weight:600">${c}</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Dept filter buttons
+  const deptF = document.getElementById('deptFilters');
+  if(deptF && !deptF.hasChildNodes()) {
+    const depts = ['all',...new Set(EMPLOYEES.map(e=>e.dept))];
+    deptF.innerHTML = depts.map(d=>`<button onclick="renderColleagues('${d}')" style="padding:6px 14px;border-radius:7px;font-size:12px;border:1px solid var(--border);background:${d===filter?'rgba(0,169,143,0.12)':'transparent'};color:${d===filter?'var(--teal-l)':'var(--muted)'};cursor:pointer">${d==='all'?'Все':DEPT_LABEL[d]||d}</button>`).join('');
+  }
+}
+
+function renderLearning() {
+  const el = document.getElementById('learningGrid');
+  if(!el) return;
+  const done = learnedItems.length;
+  const total = LEARNING_TRACKS.length;
+  document.getElementById('learnProgress').textContent = `${done}/${total}`;
+  const pct = Math.round(done/total*100);
+  document.getElementById('learnPct').textContent = pct+'%';
+  document.getElementById('learnBar').style.width = pct+'%';
+
+  el.innerHTML = LEARNING_TRACKS.map(t => {
+    const completed = learnedItems.includes(t.id);
+    return `<div style="background:var(--card);border:1px solid ${completed?'rgba(74,222,128,0.3)':'var(--border)'};border-radius:16px;padding:20px;position:relative;overflow:hidden">
+      ${completed?'<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4ade80,#34d399)"></div>':''}
+      <div style="display:flex;align-items:start;gap:12px">
+        <div style="width:44px;height:44px;border-radius:12px;background:${t.bg};display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${t.icon}</div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
+            <span style="font-size:13px;font-weight:700">${t.title}</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+            <span style="background:${t.bg};color:${t.color};border-radius:5px;padding:2px 8px;font-size:10px;font-weight:700">${t.type}</span>
+            <span style="font-size:11px;color:var(--dim)">⏱ ${t.duration}</span>
+            <span style="font-size:11px;color:var(--dim)">📗 ${t.modules} модулей</span>
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px">${t.desc}</p>
+          <button onclick="toggleLearn('${t.id}')" style="background:${completed?'rgba(74,222,128,0.1)':'rgba(0,169,143,0.1)'};color:${completed?'#4ade80':'var(--teal-l)'};border:1px solid ${completed?'rgba(74,222,128,0.3)':'rgba(0,169,143,0.25)'};border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer">
+            ${completed?'✅ Пройдено':'▶ Начать обучение'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleLearn(id) {
+  if(learnedItems.includes(id)) {
+    learnedItems = learnedItems.filter(i=>i!==id);
+  } else {
+    learnedItems.push(id);
+  }
+  localStorage.setItem('ddc_learn', JSON.stringify(learnedItems));
+  renderLearning();
+}
+
+function filterOrgDept(dept) {
+  orgFilter = dept;
+  renderOrgEmp(dept);
+  document.getElementById('orgFilterLabel').textContent = dept==='all'?'Все сотрудники':DEPT_LABEL[dept];
+}
+
+function renderOrgEmp(filter) {
+  const list = filter==='all' ? EMPLOYEES : EMPLOYEES.filter(e=>e.dept===filter);
+  const el = document.getElementById('orgEmpGrid');
+  if(!el) return;
+  el.innerHTML = list.map(emp => {
+    const dc = DEPT_COLOR[emp.dept] || {bg:'rgba(0,169,143,0.15)',c:'var(--teal-l)'};
+    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px">
+      <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,${dc.c}bb,${dc.c}66);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#fff;flex-shrink:0">${emp.initials}</div>
+      <div>
+        <div style="font-size:13px;font-weight:700">${emp.name}</div>
+        <div style="font-size:11px;color:${dc.c}">${emp.role.ru}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">${DEPT_LABEL[emp.dept]||emp.dept}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderBoard() {
+  const el = document.getElementById('boardGrid');
+  if(!el) return;
+  el.innerHTML = BOARD_MEMBERS.map(m=>`
+    <div style="background:var(--card);border:1px solid ${m.isChairman?'rgba(251,191,36,0.3)':'var(--border)'};border-radius:18px;padding:24px;display:flex;align-items:start;gap:20px">
+      <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,${m.color}88,${m.color}44);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:900;font-size:18px;color:#fff;flex-shrink:0">${m.initials}</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+          <div style="font-family:'Manrope',sans-serif;font-size:17px;font-weight:800">${m.name}</div>
+          ${m.isChairman?'<span style="background:rgba(251,191,36,0.12);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">Председатель</span>':''}
+        </div>
+        <div style="font-size:13px;color:${m.color};font-weight:600;margin-bottom:4px">${m.role}</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px">${m.title}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${m.tags.map(t=>`<span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:3px 8px;font-size:11px;color:var(--muted)">${t}</span>`).join('')}</div>
+        <p style="font-size:12px;color:var(--dim);line-height:1.6">${m.bio}</p>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('mgmtGrid').innerHTML = MGMT_MEMBERS.map(m=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px">
+      <div style="width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,${m.color}88,${m.color}44);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#fff;flex-shrink:0">${m.initials}</div>
+      <div>
+        <div style="font-size:14px;font-weight:700">${m.name}</div>
+        <div style="font-size:12px;color:${m.color};font-weight:600">${m.role}</div>
+        <div style="font-size:11px;color:var(--dim)">${m.title}</div>
+      </div>
+    </div>`).join('');
+}
+
+function initPortal() {
+  // Pre-render department filters
+  const deptF = document.getElementById('deptFilters');
+  if(deptF) {
+    const depts = ['all',...new Set(EMPLOYEES.map(e=>e.dept))];
+    deptF.innerHTML = depts.map(d=>`<button onclick="renderColleagues('${d}');document.querySelectorAll('#deptFilters button').forEach(b=>b.style.color='var(--muted)');this.style.color='var(--teal-l)'" style="padding:6px 14px;border-radius:7px;font-size:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">${d==='all'?'Все':DEPT_LABEL[d]||d}</button>`).join('');
+  }
+}
+if(document.readyState==='complete') initPortal();
+else document.addEventListener('DOMContentLoaded', initPortal);
+</script>

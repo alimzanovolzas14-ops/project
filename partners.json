@@ -1,0 +1,21 @@
+// PARTNERS_DATA data
+const PARTNERS_DATA = [
+  {cat:'gov',icon:'🏦',bg:'rgba(0,169,143,.1)',name:'Национальный Банк РК',desc:'Учредитель и основной заказчик DDC',tag:'Основатель',link:'https://nationalbank.kz'},
+  {cat:'gov',icon:'🏛️',bg:'rgba(59,130,246,.1)',name:'Правительство РК',desc:'Цифровизация госуслуг и Smart Bridge',tag:'Заказчик',link:'https://gov.kz'},
+  {cat:'gov',icon:'📱',bg:'rgba(59,130,246,.1)',name:'eGov Kazakhstan',desc:'3 200+ государственных услуг онлайн',tag:'Интегратор',link:'https://egov.kz'},
+  {cat:'gov',icon:'🌉',bg:'rgba(59,130,246,.1)',name:'Smart Bridge',desc:'Межведомственная интеграционная шина',tag:'Платформа',link:'https://egov.kz'},
+  {cat:'gov',icon:'🏛️',bg:'rgba(167,139,250,.1)',name:'МЦРИАП РК',desc:'Министерство цифрового развития РК',tag:'Регулятор',link:'https://mci.gov.kz'},
+  {cat:'gov',icon:'💰',bg:'rgba(251,191,36,.1)',name:'Министерство Финансов',desc:'Бюджетные информационные системы',tag:'Заказчик',link:'https://minfin.gov.kz'},
+  {cat:'bank',icon:'🏦',bg:'rgba(0,169,143,.1)',name:'Halyk Bank',desc:'Open Banking API, Digital Tenge',tag:'Партнёр',link:'https://halykbank.kz'},
+  {cat:'bank',icon:'🏦',bg:'rgba(0,169,143,.1)',name:'Kaspi Bank',desc:'FinTech интеграция, платёжные сервисы',tag:'Партнёр',link:'https://kaspi.kz'},
+  {cat:'bank',icon:'🏦',bg:'rgba(0,169,143,.1)',name:'ForteBank',desc:'Open Banking, SIEM интеграция',tag:'Партнёр',link:'https://forte.kz'},
+  {cat:'bank',icon:'🏦',bg:'rgba(0,169,143,.1)',name:'BCC Bank',desc:'Цифровой банкинг, API Gateway',tag:'Партнёр',link:'https://bcc.kz'},
+  {cat:'tech',icon:'🔴',bg:'rgba(248,113,113,.1)',name:'Red Hat',desc:'OpenShift, RHEL, Ansible',tag:'Вендор',link:'https://redhat.com'},
+  {cat:'tech',icon:'☁️',bg:'rgba(59,130,246,.1)',name:'Microsoft Azure',desc:'Гибридное облако, Active Directory',tag:'Вендор',link:'https://azure.microsoft.com'},
+  {cat:'tech',icon:'🔴',bg:'rgba(248,113,113,.08)',name:'Oracle',desc:'Database, Financial Services Suite',tag:'Вендор',link:'https://oracle.com'},
+  {cat:'tech',icon:'🛡️',bg:'rgba(248,113,113,.08)',name:'Palo Alto Networks',desc:'NGFW, Cortex XDR, SIEM',tag:'Security',link:'https://paloaltonetworks.com'},
+  {cat:'tech',icon:'🌊',bg:'rgba(0,169,143,.08)',name:'Confluent / Kafka',desc:'Стриминг данных, Event Bus',tag:'Data',link:'https://confluent.io'},
+  {cat:'edu',icon:'🎓',bg:'rgba(167,139,250,.1)',name:'Nazarbayev University',desc:'Совместные AI/ML исследования',tag:'Образование',link:'https://nu.edu.kz'},
+  {cat:'edu',icon:'🎓',bg:'rgba(167,139,250,.1)',name:'КБТУ',desc:'Подготовка кадров, стажировки',tag:'Образование',link:'https://kbtu.kz'},
+  {cat:'edu',icon:'🎓',bg:'rgba(167,139,250,.1)',name:'IITU',desc:'Партнёрская программа разработчиков',tag:'Образование',link:'https://iitu.edu.kz'},
+];

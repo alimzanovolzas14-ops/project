@@ -1,0 +1,31 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Команда специалистов</div>
+    <h1 data-ru="Наши специалисты" data-kz="Біздің мамандар" data-en="Our Specialists">Наши специалисты</h1>
+    <p data-ru="271 профессионал в области кибербезопасности, AI, FinTech и разработки" data-kz="Киберқауіпсіздік, AI, FinTech және әзірлеу саласындағы 271 маман" data-en="271 professionals in cybersecurity, AI, FinTech and software development">271 профессионал в области кибербезопасности, AI, FinTech и разработки</p>
+  </div>
+  
+  <div class="page-content">
+    <div style="max-width:1280px;margin:0 auto;padding:0 48px">
+    <div class="section-hd">
+      <div class="eyebrow">Команда</div>
+      <h2 class="title">Наши специалисты</h2>
+      <div class="divider"></div>
+      <p class="subtitle">271 профессионал в области кибербезопасности, AI, FinTech и разработки</p>
+    </div>
+    <div class="emp-search-bar">
+      <input class="emp-search-input" id="empSearch" placeholder="🔍 Поиск по имени или должности..." oninput="filterEmployees()">
+      <div class="emp-dept-filter">
+        <button class="emp-filter-btn active" onclick="filterEmpDept('all',this)">Все</button>
+        <button class="emp-filter-btn" onclick="filterEmpDept('cyber',this)">🔒 Cyber Security</button>
+        <button class="emp-filter-btn" onclick="filterEmpDept('ai',this)">🤖 AI Lab</button>
+        <button class="emp-filter-btn" onclick="filterEmpDept('data',this)">📊 Data</button>
+        <button class="emp-filter-btn" onclick="filterEmpDept('cloud',this)">☁️ Cloud</button>
+        <button class="emp-filter-btn" onclick="filterEmpDept('fintech',this)">💳 FinTech</button>
+        <button class="emp-filter-btn" onclick="filterEmpDept('dev',this)">💻 Development</button>
+      </div>
+    </div>
+    <div class="emp-grid" id="empGrid"></div>
+  </div>
+  </div>
+</main>

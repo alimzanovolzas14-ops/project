@@ -1,0 +1,281 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow" data-ru="Инфраструктура" data-kz="Инфрақұрылым" data-en="Infrastructure">Инфраструктура</div>
+    <h1 data-ru="Data Center & Infrastructure" data-kz="Деректер орталығы & Инфрақұрылым" data-en="Data Center & Infrastructure">Data Center & Infrastructure</h1>
+    <p data-ru="Tier III дата-центр, 99.99% uptime, GovCloud — основа цифровой экосистемы Казахстана" data-kz="Tier III деректер орталығы, 99.99% uptime, GovCloud — Қазақстан цифрлық экожүйесінің негізі" data-en="Tier III data center, 99.99% uptime, GovCloud — the backbone of Kazakhstan digital ecosystem">Tier III дата-центр, 99.99% uptime, GovCloud — основа цифровой экосистемы Казахстана</p>
+  </div>
+
+  <!-- Tab navigation -->
+  <div class="page-tabs">
+    <button class="page-tab-btn active" onclick="showInfraTab('dc',this)" data-ru="Data Center" data-kz="Деректер орталығы" data-en="Data Center">Data Center</button>
+    <button class="page-tab-btn" onclick="showInfraTab('arch',this)" data-ru="Архитектура" data-kz="Архитектура" data-en="Architecture">Архитектура</button>
+    <button class="page-tab-btn" onclick="showInfraTab('status',this)" data-ru="Статус сервисов" data-kz="Сервис күйі" data-en="Service Status">Статус сервисов</button>
+  </div>
+
+  <!-- TAB: DATA CENTER -->
+  <div class="infra-tab-panel" id="infra-dc" style="display:block">
+    <div style="max-width:1280px;margin:0 auto;padding:28px 48px">
+      <div style="display:flex;align-items:center;gap:16px;justify-content:center;margin-bottom:28px">
+        <div style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);border-radius:10px;padding:12px 24px;display:flex;align-items:center;gap:10px">
+          <div style="width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></div>
+          <span style="font-size:13px;font-weight:600;color:var(--green)" data-ru="Все системы работают штатно" data-kz="Барлық жүйелер жұмыс жасауда" data-en="All systems operational">Все системы работают штатно</span>
+        </div>
+        <span style="font-size:12px;color:var(--dim)">Tier III · Астана</span>
+        <span style="font-size:12px;color:var(--dim)">DR · Алматы</span>
+      </div>
+      <div class="dc-grid">
+        <div class="dc-panel">
+          <div class="dc-panel-title" data-ru="🏗️ Общие характеристики" data-kz="🏗️ Жалпы сипаттамалар" data-en="🏗️ General Specifications">🏗️ Общие характеристики</div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Tier Level" data-en="Tier Level">Tier Level</span><span class="dc-badge dc-badge-green">Tier III</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Доступность" data-kz="Қолжетімділік" data-en="Availability">Доступность</span><span class="dc-spec-value" style="color:var(--green)">99.99%</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Общая площадь" data-kz="Жалпы аудан" data-en="Total area">Общая площадь</span><span class="dc-spec-value">2 400 м²</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Стойко-мест" data-kz="Стойка орындары" data-en="Rack units">Стойко-мест</span><span class="dc-spec-value">480 rack units</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Мощность IT" data-kz="IT қуаты" data-en="IT Power">Мощность IT</span><span class="dc-spec-value">3.2 МВт</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Охлаждение" data-kz="Салқындату" data-en="Cooling">Охлаждение</span><span class="dc-spec-value">Precision Air / Water</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">PUE</span><span class="dc-spec-value" style="color:var(--green)">1.38</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">DR Site</span><span class="dc-badge dc-badge-blue">Алматы — Active/Passive</span></div>
+        </div>
+        <div class="dc-panel">
+          <div class="dc-panel-title" data-ru="⚡ Вычислительные ресурсы" data-kz="⚡ Есептеу ресурстары" data-en="⚡ Compute Resources">⚡ Вычислительные ресурсы</div>
+          <div class="dc-rack-viz">
+            <div class="dc-rack"><div class="dc-rack-icon">🖥️</div><div class="dc-rack-label" data-ru="Серверов" data-en="Servers">Серверов</div><div class="dc-rack-val">240</div></div>
+            <div class="dc-rack"><div class="dc-rack-icon">💻</div><div class="dc-rack-label">vCPU</div><div class="dc-rack-val">12,800</div></div>
+            <div class="dc-rack"><div class="dc-rack-icon">🧠</div><div class="dc-rack-label">RAM</div><div class="dc-rack-val">192 TB</div></div>
+            <div class="dc-rack"><div class="dc-rack-icon">🗄️</div><div class="dc-rack-label">SSD Storage</div><div class="dc-rack-val">4.8 PB</div></div>
+          </div>
+          <div style="margin-top:18px">
+            <div class="dc-panel-title" style="margin-bottom:10px" data-ru="📊 Текущая нагрузка" data-kz="📊 Ағымдағы жүктеме" data-en="📊 Current Load">📊 Текущая нагрузка</div>
+            <div id="dcGauges">
+              <div class="dc-gauge-row"><span class="dc-gauge-label">CPU</span><div class="dc-gauge-bar"><div class="dc-gauge-fill" style="width:67%;background:var(--teal)"></div></div><span class="dc-gauge-val" style="color:var(--teal)">67%</span></div>
+              <div class="dc-gauge-row"><span class="dc-gauge-label">RAM</span><div class="dc-gauge-bar"><div class="dc-gauge-fill" style="width:54%;background:var(--blue)"></div></div><span class="dc-gauge-val" style="color:var(--blue)">54%</span></div>
+              <div class="dc-gauge-row"><span class="dc-gauge-label">Storage</span><div class="dc-gauge-bar"><div class="dc-gauge-fill" style="width:43%;background:var(--purple)"></div></div><span class="dc-gauge-val" style="color:var(--purple)">43%</span></div>
+              <div class="dc-gauge-row"><span class="dc-gauge-label">Network</span><div class="dc-gauge-bar"><div class="dc-gauge-fill" style="width:78%;background:var(--yellow)"></div></div><span class="dc-gauge-val" style="color:var(--yellow)">78%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="dc-panel">
+          <div class="dc-panel-title" data-ru="☁️ Виртуализация" data-kz="☁️ Виртуализация" data-en="☁️ Virtualization">☁️ Виртуализация</div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Платформа" data-en="Platform">Платформа</span><span class="dc-badge dc-badge-blue">Red Hat OpenShift 4.14</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">K8s Nodes</span><span class="dc-spec-value">180 nodes</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">Pods Running</span><span class="dc-spec-value" id="dcPods">2,847</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">Namespaces</span><span class="dc-spec-value">47</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">Registry</span><span class="dc-spec-value">Quay.io / Private</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">CI/CD</span><span class="dc-spec-value">GitLab CI / ArgoCD</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">Service Mesh</span><span class="dc-spec-value">Istio</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Деплоев/день" data-en="Deploys/day">Деплоев/день</span><span class="dc-spec-value" style="color:var(--green)">34 avg</span></div>
+        </div>
+        <div class="dc-panel">
+          <div class="dc-panel-title" data-ru="🛡️ Безопасность & Резерв" data-kz="🛡️ Қауіпсіздік & Резерв" data-en="🛡️ Security & Backup">🛡️ Безопасность & Резерв</div>
+          <div class="dc-spec-row"><span class="dc-spec-label">Backup</span><span class="dc-spec-value">3-2-1 Rule</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">RPO</span><span class="dc-spec-value" style="color:var(--green)">&lt; 15 мин</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">RTO</span><span class="dc-spec-value" style="color:var(--green)">&lt; 4 часа</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Шифрование" data-en="Encryption">Шифрование</span><span class="dc-spec-value">AES-256</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Сеть" data-en="Network">Сеть</span><span class="dc-spec-value">10/25/100 GbE</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">BGP Uplinks</span><span class="dc-spec-value">3 (N+1)</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label">DDoS</span><span class="dc-spec-value">200 Gbps</span></div>
+          <div class="dc-spec-row"><span class="dc-spec-label" data-ru="Физ. охрана" data-en="Physical security">Физ. охрана</span><span class="dc-spec-value">Biometric / 24/7</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: ARCHITECTURE -->
+  <div class="infra-tab-panel" id="infra-arch" style="display:none">
+    <div style="max-width:1280px;margin:0 auto;padding:28px 48px">
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:8px" data-ru="Архитектура платформ DDC" data-kz="DDC платформа архитектурасы" data-en="DDC Platform Architecture">Архитектура платформ DDC</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:24px" data-ru="Реальные технические стеки и потоки данных — от клиента до базы данных" data-kz="Нақты техникалық стектер мен деректер ағындары" data-en="Real technology stacks and data flows — from client to database">Реальные технические стеки и потоки данных — от клиента до базы данных</p>
+
+      <!-- Architecture sub-tabs -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px" id="archSubTabs">
+        <button class="arch-tab active" onclick="showArch('web',this)">🌐 Web Platform</button>
+        <button class="arch-tab" onclick="showArch('siem',this)">🛡️ SIEM Pipeline</button>
+        <button class="arch-tab" onclick="showArch('cbdc',this)">💳 Digital Tenge</button>
+        <button class="arch-tab" onclick="showArch('data',this)">📊 Data Pipeline</button>
+        <button class="arch-tab" onclick="showArch('ai',this)">🤖 AI Inference</button>
+      </div>
+
+      <!-- Web Platform diagram -->
+      <div class="arch-diagram active" id="arch-web">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="arch-layer"><div class="arch-layer-label">Client Layer</div><div class="arch-row">
+            <div class="arch-node highlight"><div class="arch-node-icon">🌐</div><div class="arch-node-name">Web Browser</div><div class="arch-node-tech">React 18 / TypeScript</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">📱</div><div class="arch-node-name">Mobile App</div><div class="arch-node-tech">React Native</div></div>
+          </div></div>
+          <div class="arch-connector"><span>HTTPS / TLS 1.3</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Gateway Layer</div><div class="arch-row">
+            <div class="arch-node security"><div class="arch-node-icon">🔐</div><div class="arch-node-name">WAF</div><div class="arch-node-tech">ModSecurity / Nginx</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">🚪</div><div class="arch-node-name">API Gateway</div><div class="arch-node-tech">WSO2 / Kong</div></div>
+            <div class="arch-node security"><div class="arch-node-icon">🔑</div><div class="arch-node-name">Auth</div><div class="arch-node-tech">Keycloak / OAuth 2.0</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Internal gRPC / REST</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Microservices</div><div class="arch-row">
+            <div class="arch-node"><div class="arch-node-icon">👤</div><div class="arch-node-name">User Service</div><div class="arch-node-tech">NestJS / Java</div></div>
+            <div class="arch-node"><div class="arch-node-icon">💰</div><div class="arch-node-name">Payment</div><div class="arch-node-tech">Spring Boot</div></div>
+            <div class="arch-node"><div class="arch-node-icon">📋</div><div class="arch-node-name">Document</div><div class="arch-node-tech">FastAPI / Python</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🔔</div><div class="arch-node-name">Notifications</div><div class="arch-node-tech">NestJS / Kafka</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Apache Kafka · Event Bus</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Data Layer</div><div class="arch-row">
+            <div class="arch-node data"><div class="arch-node-icon">🐘</div><div class="arch-node-name">PostgreSQL</div><div class="arch-node-tech">Primary DB / HA</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">🔴</div><div class="arch-node-name">Redis</div><div class="arch-node-tech">Cache / Sessions</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">🔍</div><div class="arch-node-name">OpenSearch</div><div class="arch-node-tech">Full-text Search</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">📁</div><div class="arch-node-name">MinIO</div><div class="arch-node-tech">Object Storage</div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- SIEM Pipeline -->
+      <div class="arch-diagram" id="arch-siem">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="arch-layer"><div class="arch-layer-label">Log Sources</div><div class="arch-row">
+            <div class="arch-node"><div class="arch-node-icon">🖥️</div><div class="arch-node-name">Servers</div><div class="arch-node-tech">Syslog / Filebeat</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🌐</div><div class="arch-node-name">Network</div><div class="arch-node-tech">Zeek / Suricata</div></div>
+            <div class="arch-node"><div class="arch-node-icon">💻</div><div class="arch-node-name">Endpoints</div><div class="arch-node-tech">Wazuh Agent</div></div>
+            <div class="arch-node"><div class="arch-node-icon">☁️</div><div class="arch-node-name">Cloud</div><div class="arch-node-tech">CloudTrail / K8s Audit</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Wazuh / Elastic Beats</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Collection & Normalization</div><div class="arch-row">
+            <div class="arch-node security"><div class="arch-node-icon">🛡️</div><div class="arch-node-name">Wazuh Manager</div><div class="arch-node-tech">SIEM Engine / XDR</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🔄</div><div class="arch-node-name">Logstash</div><div class="arch-node-tech">Parsing / Enrichment</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Sigma Rules / MITRE ATT&amp;CK Mapping</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Storage & Search</div><div class="arch-row">
+            <div class="arch-node data"><div class="arch-node-icon">🔍</div><div class="arch-node-name">OpenSearch</div><div class="arch-node-tech">Hot / Warm / Cold</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">🧩</div><div class="arch-node-name">MISP</div><div class="arch-node-tech">Threat Intel</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Automated Triage / ML Scoring</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Response & Case Management</div><div class="arch-row">
+            <div class="arch-node security"><div class="arch-node-icon">🐝</div><div class="arch-node-name">TheHive</div><div class="arch-node-tech">Case Management</div></div>
+            <div class="arch-node security"><div class="arch-node-icon">🔀</div><div class="arch-node-name">Shuffle SOAR</div><div class="arch-node-tech">Automation</div></div>
+            <div class="arch-node security"><div class="arch-node-icon">🦅</div><div class="arch-node-name">Velociraptor</div><div class="arch-node-tech">DFIR</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Escalation</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">SOC Analysts</div><div class="arch-row">
+            <div class="arch-node highlight"><div class="arch-node-icon">👤</div><div class="arch-node-name">L1 Analyst</div><div class="arch-node-tech">Triage</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">👤</div><div class="arch-node-name">L2 Analyst</div><div class="arch-node-tech">Investigation</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">👤</div><div class="arch-node-name">L3 / IR Team</div><div class="arch-node-tech">Incident Response</div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Digital Tenge CBDC -->
+      <div class="arch-diagram" id="arch-cbdc">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="arch-layer"><div class="arch-layer-label">Client Apps</div><div class="arch-row">
+            <div class="arch-node highlight"><div class="arch-node-icon">📱</div><div class="arch-node-name">Mobile Wallet</div><div class="arch-node-tech">React Native</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">🏦</div><div class="arch-node-name">Bank Interface</div><div class="arch-node-tech">Web / API</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">🏪</div><div class="arch-node-name">Merchant POS</div><div class="arch-node-tech">SDK / QR</div></div>
+          </div></div>
+          <div class="arch-connector"><span>TLS 1.3 / mTLS</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Security & Auth</div><div class="arch-row">
+            <div class="arch-node security"><div class="arch-node-icon">🛡️</div><div class="arch-node-name">HSM</div><div class="arch-node-tech">Hardware Security Module</div></div>
+            <div class="arch-node security"><div class="arch-node-icon">🔑</div><div class="arch-node-name">PKI</div><div class="arch-node-tech">Digital Signature / eKYC</div></div>
+            <div class="arch-node security"><div class="arch-node-icon">🔐</div><div class="arch-node-name">Vault</div><div class="arch-node-tech">Secrets Management</div></div>
+          </div></div>
+          <div class="arch-connector"><span>ISO 20022 / PCI DSS Level 1</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">CBDC Core Engine</div><div class="arch-row">
+            <div class="arch-node"><div class="arch-node-icon">⚡</div><div class="arch-node-name">Transaction Core</div><div class="arch-node-tech">Java / Spring Boot</div></div>
+            <div class="arch-node"><div class="arch-node-icon">📒</div><div class="arch-node-name">Ledger</div><div class="arch-node-tech">Distributed Ledger</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🔀</div><div class="arch-node-name">Smart Contracts</div><div class="arch-node-tech">Programmable Money</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Apache Kafka — Real-time Streams</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Data & Analytics</div><div class="arch-row">
+            <div class="arch-node data"><div class="arch-node-icon">🐘</div><div class="arch-node-name">PostgreSQL</div><div class="arch-node-tech">Transactional DB</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">🔴</div><div class="arch-node-name">Redis Cluster</div><div class="arch-node-tech">Rate Limiting</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">📊</div><div class="arch-node-name">ClickHouse</div><div class="arch-node-tech">Analytics OLAP</div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Data Pipeline -->
+      <div class="arch-diagram" id="arch-data">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="arch-layer"><div class="arch-layer-label">Data Sources</div><div class="arch-row">
+            <div class="arch-node"><div class="arch-node-icon">🏦</div><div class="arch-node-name">Banking Systems</div><div class="arch-node-tech">Core Banking / ABS</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🏛️</div><div class="arch-node-name">Gov Systems</div><div class="arch-node-tech">eGov / Smart Bridge</div></div>
+            <div class="arch-node"><div class="arch-node-icon">📡</div><div class="arch-node-name">IoT Sensors</div><div class="arch-node-tech">Smart City / 12K nodes</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Apache Kafka — 5TB/day</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Processing</div><div class="arch-row">
+            <div class="arch-node data"><div class="arch-node-icon">⚡</div><div class="arch-node-name">Apache Spark</div><div class="arch-node-tech">Batch Processing</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">🌊</div><div class="arch-node-name">Kafka Streams</div><div class="arch-node-tech">Real-time</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🔧</div><div class="arch-node-name">dbt</div><div class="arch-node-tech">Data Transform</div></div>
+          </div></div>
+          <div class="arch-connector"><span>Data Warehouse</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Storage Tiers</div><div class="arch-row">
+            <div class="arch-node data"><div class="arch-node-icon">⚡</div><div class="arch-node-name">ClickHouse</div><div class="arch-node-tech">Hot / OLAP</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">🗄️</div><div class="arch-node-name">MinIO</div><div class="arch-node-tech">Warm / Lake</div></div>
+            <div class="arch-node data"><div class="arch-node-icon">📁</div><div class="arch-node-name">Archive</div><div class="arch-node-tech">Cold</div></div>
+          </div></div>
+          <div class="arch-connector"><span>BI / Visualization</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Analytics</div><div class="arch-row">
+            <div class="arch-node highlight"><div class="arch-node-icon">📊</div><div class="arch-node-name">Superset</div><div class="arch-node-tech">BI Dashboard</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">📈</div><div class="arch-node-name">Grafana</div><div class="arch-node-tech">Metrics</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">🤖</div><div class="arch-node-name">ML Models</div><div class="arch-node-tech">TensorFlow</div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- AI Inference -->
+      <div class="arch-diagram" id="arch-ai">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="arch-layer"><div class="arch-layer-label">Input Layer</div><div class="arch-row">
+            <div class="arch-node"><div class="arch-node-icon">📝</div><div class="arch-node-name">Text / NLP</div><div class="arch-node-tech">Citizen Requests</div></div>
+            <div class="arch-node"><div class="arch-node-icon">📷</div><div class="arch-node-name">Images / Video</div><div class="arch-node-tech">eKYC / Surveillance</div></div>
+            <div class="arch-node"><div class="arch-node-icon">📊</div><div class="arch-node-name">Structured Data</div><div class="arch-node-tech">Transactions</div></div>
+          </div></div>
+          <div class="arch-connector"><span>FastAPI / gRPC</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Model Serving</div><div class="arch-row">
+            <div class="arch-node highlight"><div class="arch-node-icon">🤗</div><div class="arch-node-name">BERT-kz</div><div class="arch-node-tech">Kazakh NLP</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">👁️</div><div class="arch-node-name">YOLO v8</div><div class="arch-node-tech">Computer Vision</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">🔍</div><div class="arch-node-name">Isolation Forest</div><div class="arch-node-tech">Anomaly Detection</div></div>
+            <div class="arch-node highlight"><div class="arch-node-icon">📈</div><div class="arch-node-name">LSTM / Prophet</div><div class="arch-node-tech">Time Series</div></div>
+          </div></div>
+          <div class="arch-connector"><span>MLflow / Model Registry</span></div>
+          <div class="arch-layer"><div class="arch-layer-label">Training Infrastructure</div><div class="arch-row">
+            <div class="arch-node"><div class="arch-node-icon">🔥</div><div class="arch-node-name">PyTorch</div><div class="arch-node-tech">Training</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🌊</div><div class="arch-node-name">Kubeflow</div><div class="arch-node-tech">ML Pipeline</div></div>
+            <div class="arch-node"><div class="arch-node-icon">🗄️</div><div class="arch-node-name">Feature Store</div><div class="arch-node-tech">Feast / Redis</div></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: SERVICE STATUS -->
+  <div class="infra-tab-panel" id="infra-status" style="display:none">
+    <div style="max-width:1280px;margin:0 auto;padding:28px 48px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+        <div style="width:10px;height:10px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></div>
+        <span style="font-size:16px;font-weight:600" data-ru="Все сервисы работают штатно" data-kz="Барлық сервистер жұмыс жасауда" data-en="All services operational">Все сервисы работают штатно</span>
+        <span style="font-size:12px;color:var(--dim)" id="statusUpdateTime">Обновлено только что</span>
+      </div>
+      <div class="uptime-grid" id="uptimeGrid">
+        <!-- Built by JS -->
+      </div>
+      <div style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px">
+        <h4 style="font-size:13px;font-weight:700;color:var(--teal-l);margin-bottom:16px;text-transform:uppercase;letter-spacing:.06em">📋 Последние инциденты</h4>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:8px;font-size:13px">
+            <span style="color:var(--green);font-weight:700">✓ Resolved</span>
+            <span style="color:var(--muted)">2025-06-10</span>
+            <span style="flex:1">Open Banking API — кратковременное снижение производительности (45 мин)</span>
+            <span style="color:var(--green);font-size:11px">SLA соблюдён</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:8px;font-size:13px">
+            <span style="color:var(--green);font-weight:700">✓ Resolved</span>
+            <span style="color:var(--muted)">2025-05-28</span>
+            <span style="flex:1">Плановое обслуживание Data Platform KZ — обновление ClickHouse 24.x</span>
+            <span style="color:var(--green);font-size:11px">Плановое</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:8px;font-size:13px">
+            <span style="color:var(--green);font-weight:700">✓ Resolved</span>
+            <span style="color:var(--muted)">2025-04-15</span>
+            <span style="flex:1">eGov Smart Bridge — плановое обновление Smart Bridge v2.8 (2 ч)</span>
+            <span style="color:var(--green);font-size:11px">Плановое</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

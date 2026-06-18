@@ -1,0 +1,54 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Технологии</div>
+    <h1 data-ru="Technology Stack" data-kz="Технологиялар стегі" data-en="Technology Stack">Technology Stack</h1>
+    <p data-ru="Инструменты и платформы, которые мы используем для государственной цифровой инфраструктуры" data-kz="Мемлекеттік цифрлық инфрақұрылым үшін пайдаланатын құралдар мен платформалар" data-en="Tools and platforms we use to build government digital infrastructure">Инструменты и платформы, которые мы используем для государственной цифровой инфраструктуры</p>
+  </div>
+  
+  <div class="page-content">
+    <div class="section-wrap">
+    <div class="section-hd">
+      <div class="eyebrow" data-i18n="tsLabel">Технологии</div>
+      <h2 class="title">Technology Stack</h2>
+      <div class="divider"></div>
+      <p class="subtitle" data-i18n="tsSub">Инструменты и платформы для государственной цифровой инфраструктуры</p>
+    </div>
+    <div class="ts-cats">
+      <button class="ts-cat active" onclick="filterTS('all',this)" data-i18n="tsAll">Все</button>
+      <button class="ts-cat" onclick="filterTS('security',this)">🔒 Security</button>
+      <button class="ts-cat" onclick="filterTS('data',this)">📊 Data</button>
+      <button class="ts-cat" onclick="filterTS('cloud',this)">☁️ Cloud</button>
+      <button class="ts-cat" onclick="filterTS('backend',this)">⚙️ Backend</button>
+      <button class="ts-cat" onclick="filterTS('frontend',this)">🖥️ Frontend</button>
+      <button class="ts-cat" onclick="filterTS('ai',this)">🤖 AI/ML</button>
+    </div>
+    <div class="ts-grid reveal" id="tsGrid"></div>
+  </div>
+<div style="max-width:1280px;margin:0 auto;padding:0 48px">
+    <div class="section-hd">
+      <div class="eyebrow">Интерактив</div>
+      <h2 class="title">Stack Builder</h2>
+      <div class="divider"></div>
+      <p class="subtitle">Перетащи технологии и собери архитектуру своего проекта — получи оценку от DDC</p>
+    </div>
+    <div class="tsb-wrap reveal">
+      <div class="tsb-palette">
+        <h4>Доступные технологии</h4>
+        <div class="tsb-chips" id="tsbPalette"></div>
+      </div>
+      <div>
+        <div class="tsb-canvas" id="tsbCanvas" ondragover="tsbDragOver(event)" ondrop="tsbDrop(event)">
+          <h4>🏗️ Твоя архитектура</h4>
+          <p style="font-size:12px;color:var(--dim);margin-bottom:12px">Перетащи сюда технологии</p>
+          <div class="tsb-chips" id="tsbDropped"></div>
+        </div>
+        <div class="tsb-actions">
+          <button class="tsb-action-btn" onclick="evaluateStack()">⚡ Оценить стек</button>
+          <button class="tsb-action-btn" onclick="clearStack()">🗑️ Очистить</button>
+        </div>
+        <div class="tsb-score" id="tsbScore"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>

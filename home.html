@@ -1,0 +1,46 @@
+<main style="min-height:80vh">
+<section id="hero-section" style="position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center">
+    <canvas id="heroCanvas" style="position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6"></canvas>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 40%,rgba(0,169,143,.08),transparent),linear-gradient(180deg,transparent 60%,var(--bg));z-index:1;pointer-events:none"></div>
+    <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:60px 48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;width:100%">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,169,143,.1);border:1px solid rgba(0,169,143,.25);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--teal-l);letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px">
+          <span style="width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></span>
+          <span data-ru="Национальный Банк Казахстана" data-kz="Қазақстан Ұлттық Банкі" data-en="National Bank of Kazakhstan">Национальный Банк Казахстана</span>
+        </div>
+        <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(38px,5vw,64px);font-weight:900;line-height:1.06;margin-bottom:18px">
+          <span data-ru="Digital" data-kz="Digital" data-en="Digital">Digital</span>
+          <span style="background:linear-gradient(90deg,var(--teal),var(--teal-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-ru=" Development" data-kz=" Development" data-en=" Development"> Development</span><br>
+          <span data-ru="Center" data-kz="Center" data-en="Center">Center</span>
+        </h1>
+        <p style="font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:32px;max-width:480px" data-ru="Государственная цифровая платформа кибербезопасности, финансовых технологий и искусственного интеллекта Казахстана" data-kz="Қазақстанның киберқауіпсіздік, қаржылық технологиялар және жасанды интеллект мемлекеттік цифрлық платформасы" data-en="Kazakhstan's state digital platform for cybersecurity, financial technologies and artificial intelligence">Государственная цифровая платформа кибербезопасности, финансовых технологий и искусственного интеллекта Казахстана</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button onclick="navigate('services')" class="btn btn-primary" data-ru="Наши услуги →" data-kz="Біздің қызметтер →" data-en="Our Services →">Наши услуги →</button>
+          <button onclick="navigate('projects')" class="btn btn-outline" data-ru="Проекты" data-kz="Жобалар" data-en="Projects">Проекты</button>
+          <button onclick="startTour()" class="btn btn-outline" style="font-size:13px">🎯 <span data-ru="Тур по сайту" data-kz="Сайт туры" data-en="Site Tour">Тур по сайту</span></button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="hero-card"><div class="hero-card-icon" style="background:rgba(248,113,113,.12)">🛡️</div><div><div class="hero-card-val" id="hcAtk">2,847</div><div class="hero-card-lbl" data-ru="Атак заблокировано сегодня" data-kz="Бүгін бұғатталған шабуылдар" data-en="Attacks blocked today">Атак заблокировано сегодня</div></div></div>
+        <div class="hero-card"><div class="hero-card-icon" style="background:rgba(96,165,250,.12)">💳</div><div><div class="hero-card-val">500K+</div><div class="hero-card-lbl" data-ru="Пользователей Digital Tenge" data-kz="Digital Tenge пайдаланушылары" data-en="Digital Tenge users">Пользователей Digital Tenge</div></div></div>
+        <div class="hero-card"><div class="hero-card-icon" style="background:rgba(0,169,143,.12)">🤖</div><div><div class="hero-card-val" id="hcAI">1.2M</div><div class="hero-card-lbl" data-ru="AI-запросов в сутки" data-kz="Тәулігіне AI сұраулары" data-en="AI requests per day">AI-запросов в сутки</div></div></div>
+        <div class="hero-card"><div class="hero-card-icon" style="background:rgba(167,139,250,.12)">📊</div><div><div class="hero-card-val">99.99%</div><div class="hero-card-lbl" data-ru="Доступность платформ" data-kz="Платформалардың қолжетімділігі" data-en="Platform uptime">Доступность платформ</div></div></div>
+      </div>
+    </div>
+  </section>
+  <div style="max-width:1280px;margin:-30px auto 0;padding:0 48px 60px">
+    <div class="stats-grid reveal">
+      <div class="stat-box"><div class="stat-num" data-count="120">0</div><div class="stat-lbl" data-ru="Активных проектов" data-kz="Белсенді жобалар" data-en="Active projects">Активных проектов</div></div>
+      <div class="stat-box"><div class="stat-num" data-count="271">0</div><div class="stat-lbl" data-ru="Специалистов" data-kz="Мамандар" data-en="Specialists">Специалистов</div></div>
+      <div class="stat-box"><div class="stat-num" data-count="18">0</div><div class="stat-lbl" data-ru="AI-продуктов" data-kz="AI өнімдер" data-en="AI products">AI-продуктов</div></div>
+      <div class="stat-box"><div class="stat-num" data-count="12">0</div><div class="stat-lbl" data-ru="Банков-партнёров" data-kz="Серіктес банктер" data-en="Partner banks">Банков-партнёров</div></div>
+    </div>
+    <div class="section-hd" style="margin-top:56px">
+      <div class="eyebrow" data-ru="Финансы" data-kz="Қаржы" data-en="Finance">Финансы</div>
+      <h2 class="title" data-ru="Курсы валют НБ РК" data-kz="ҚР ҰБ валюта бағамдары" data-en="NBK Exchange Rates">Курсы валют НБ РК</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="cur-grid reveal" id="curGrid"><div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--dim);font-size:13px">⏳ Загрузка...</div></div>
+    <div class="cur-meta" id="curMeta"></div>
+  </div>
+</main>

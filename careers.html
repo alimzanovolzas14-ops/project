@@ -1,0 +1,28 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Карьера в DDC</div>
+    <h1 data-ru="Присоединяйтесь к команде" data-kz="DDC командасына қосылыңыз" data-en="Join the DDC Team">Присоединяйтесь к команде</h1>
+    <p data-ru="14 открытых вакансий · Оплачиваемые стажировки · Программа молодых специалистов" data-kz="14 ашық вакансия · Ақылы тағылымдама · Жас мамандар бағдарламасы" data-en="14 open vacancies · Paid internships · Young professionals program">14 открытых вакансий · Оплачиваемые стажировки · Программа молодых специалистов</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:24px 48px 0">
+    <div class="kpi-card"><div class="kpi-val">271</div><div class="kpi-lbl">Сотрудников</div></div>
+    <div class="kpi-card"><div class="kpi-val">14</div><div class="kpi-lbl">Открытых вакансий</div></div>
+    <div class="kpi-card"><div class="kpi-val">5</div><div class="kpi-lbl">Стажировок</div></div>
+    <div class="kpi-card"><div class="kpi-val">3-4 нед</div><div class="kpi-lbl">Срок найма</div></div>
+  </div>
+  <div style="display:flex;gap:8px;padding:20px 48px 0;flex-wrap:wrap">
+    <button class="proj-tab active" onclick="filterVacs('all',this)">Все (14)</button>
+    <button class="proj-tab" onclick="filterVacs('Кибербезопасность',this)">🔒 Кибербезопасность</button>
+    <button class="proj-tab" onclick="filterVacs('AI',this)">🤖 AI & Data</button>
+    <button class="proj-tab" onclick="filterVacs('Разработка',this)">💻 Разработка</button>
+    <button class="proj-tab" onclick="filterVacs('Облако',this)">☁️ Облако</button>
+    <button class="proj-tab" onclick="filterVacs('Стажировка',this)">🎓 Стажировки</button>
+  </div>
+  <div class="vacancy-list" id="vacList" style="margin-top:14px"></div>
+  <div style="padding:20px 48px 32px">
+    <div style="background:linear-gradient(135deg,rgba(0,169,143,.1),rgba(0,40,34,.5));border:1px solid rgba(0,169,143,.2);border-radius:16px;padding:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div style="flex:1"><h3 style="font-size:16px;font-weight:700;margin-bottom:6px">📧 Отправить резюме напрямую</h3><p style="font-size:13px;color:var(--muted)">Не нашли подходящей вакансии? Напишите на hr@ddc.gov.kz</p></div>
+      <a href="mailto:hr@ddc.gov.kz" class="btn btn-primary" style="text-decoration:none;font-size:13px">📩 hr@ddc.gov.kz</a>
+    </div>
+  </div>
+</main>

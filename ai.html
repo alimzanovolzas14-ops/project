@@ -1,0 +1,55 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+  <div class="page-hero-eyebrow">Искусственный интеллект</div>
+  <h1 data-ru="AI Innovation Lab" data-kz="AI Innovation Зертхана" data-en="AI Innovation Lab">AI Innovation Lab</h1>
+  <p data-ru="8 направлений AI: ML, NLP, CV, Document AI, Predictive, Anomaly Detection, GenAI, LLM" data-kz="8 AI бағыты: ML, NLP, CV, Document AI, Predictive, Anomaly Detection, GenAI, LLM" data-en="8 AI directions: ML, NLP, CV, Document AI, Predictive, Anomaly Detection, GenAI, LLM">8 направлений AI: ML, NLP, CV, Document AI, Predictive, Anomaly Detection, GenAI, LLM</p>
+</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-val">1.2M+</div><div class="kpi-lbl" data-ru="AI-запросов в сутки" data-kz="Тәулігіне AI сұраулары" data-en="AI requests per day">AI-запросов в сутки</div><div class="kpi-trend" style="color:var(--green)">↑ +12% за неделю</div></div>
+    <div class="kpi-card"><div class="kpi-val">94%</div><div class="kpi-lbl" data-ru="Точность моделей" data-kz="Модель дәлдігі" data-en="Model accuracy">Точность моделей</div><div class="kpi-trend" style="color:var(--green)">↑ +2.1%</div></div>
+    <div class="kpi-card"><div class="kpi-val">18</div><div class="kpi-lbl" data-ru="AI-продуктов в prod" data-kz="Prod-тағы AI өнімдер" data-en="AI products in prod">AI-продуктов в prod</div><div class="kpi-trend" style="color:var(--teal-l)">→ Стабильно</div></div>
+    <div class="kpi-card"><div class="kpi-val">3x</div><div class="kpi-lbl" data-ru="Ускорение процессов" data-kz="Процестерді жеделдету" data-en="Process speedup">Ускорение процессов</div><div class="kpi-trend" style="color:var(--green)">↑ Цель достигнута</div></div>
+  </div>
+  <div class="ai-mod-grid"><div class="ai-mod" onclick="openAIMod('ml','Machine Learning',`Предиктивная аналитика, детекция аномалий, прогнозирование рисков`,'TensorFlow · PyTorch · Scikit-learn')">
+  <div class="ai-mod-icon">🧠</div>
+  <div class="ai-mod-name">Machine Learning</div>
+  <div class="ai-mod-desc">Предиктивная аналитика, детекция аномалий, прогнозирование рисков</div>
+  <div class="ai-mod-tech">TensorFlow · PyTorch · Scikit-learn</div>
+</div><div class="ai-mod" onclick="openAIMod('nlp','NLP & Chatbots',`Казахский/русский NLP, BERT-kz, многоязычные чат-боты для госпорталов`,'LangChain · HuggingFace · BERT-kz')">
+  <div class="ai-mod-icon">💬</div>
+  <div class="ai-mod-name">NLP & Chatbots</div>
+  <div class="ai-mod-desc">Казахский/русский NLP, BERT-kz, многоязычные чат-боты для госпорталов</div>
+  <div class="ai-mod-tech">LangChain · HuggingFace · BERT-kz</div>
+</div><div class="ai-mod" onclick="openAIMod('cv','Computer Vision',`Распознавание лиц, видеоаналитика, верификация документов`,'YOLO v8 · OpenCV · MediaPipe')">
+  <div class="ai-mod-icon">👁️</div>
+  <div class="ai-mod-name">Computer Vision</div>
+  <div class="ai-mod-desc">Распознавание лиц, видеоаналитика, верификация документов</div>
+  <div class="ai-mod-tech">YOLO v8 · OpenCV · MediaPipe</div>
+</div><div class="ai-mod" onclick="openAIMod('doc','Document AI',`Автоизвлечение данных, OCR на казахском/русском, классификация документов`,'Tesseract · LayoutLM · PaddleOCR')">
+  <div class="ai-mod-icon">📄</div>
+  <div class="ai-mod-name">Document AI</div>
+  <div class="ai-mod-desc">Автоизвлечение данных, OCR на казахском/русском, классификация документов</div>
+  <div class="ai-mod-tech">Tesseract · LayoutLM · PaddleOCR</div>
+</div><div class="ai-mod" onclick="openAIMod('pred','Predictive Analytics',`Прогнозирование курсов валют, кредитных рисков, нагрузки систем`,'Prophet · LSTM · XGBoost')">
+  <div class="ai-mod-icon">📈</div>
+  <div class="ai-mod-name">Predictive Analytics</div>
+  <div class="ai-mod-desc">Прогнозирование курсов валют, кредитных рисков, нагрузки систем</div>
+  <div class="ai-mod-tech">Prophet · LSTM · XGBoost</div>
+</div><div class="ai-mod" onclick="openAIMod('anom','Anomaly Detection',`Выявление мошеннических транзакций и угроз ИБ в реальном времени`,'Isolation Forest · Autoencoders · DBSCAN')">
+  <div class="ai-mod-icon">🔍</div>
+  <div class="ai-mod-name">Anomaly Detection</div>
+  <div class="ai-mod-desc">Выявление мошеннических транзакций и угроз ИБ в реальном времени</div>
+  <div class="ai-mod-tech">Isolation Forest · Autoencoders · DBSCAN</div>
+</div><div class="ai-mod" onclick="openAIMod('gen','Generative AI',`Синтез данных, создание контента, augmentation для обучения моделей`,'GPT-4 API · Stable Diffusion · DALL-E')">
+  <div class="ai-mod-icon">🎨</div>
+  <div class="ai-mod-name">Generative AI</div>
+  <div class="ai-mod-desc">Синтез данных, создание контента, augmentation для обучения моделей</div>
+  <div class="ai-mod-tech">GPT-4 API · Stable Diffusion · DALL-E</div>
+</div><div class="ai-mod" onclick="openAIMod('llm','LLM Platform',`Корпоративные LLM, RAG, Knowledge Base для государственных сервисов`,'LangChain · Chroma · Ollama · vLLM')">
+  <div class="ai-mod-icon">🤖</div>
+  <div class="ai-mod-name">LLM Platform</div>
+  <div class="ai-mod-desc">Корпоративные LLM, RAG, Knowledge Base для государственных сервисов</div>
+  <div class="ai-mod-tech">LangChain · Chroma · Ollama · vLLM</div>
+</div></div>
+  <div style="padding:0 48px 32px"><canvas id="aiActivityChart" height="120"></canvas></div>
+</main>

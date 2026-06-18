@@ -1,0 +1,386 @@
+<main style="padding-bottom:80px">
+<!-- ARM Hero -->
+<section style="background:linear-gradient(135deg,rgba(248,113,113,0.08),rgba(167,139,250,0.06));border-bottom:1px solid rgba(248,113,113,0.15);padding:40px 0 32px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 48px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.25);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:#f87171;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">
+          <span style="width:6px;height:6px;background:#f87171;border-radius:50%;animation:pulse 2s infinite"></span>
+          CONCEPT ARM — Attack Risk Matrix
+        </div>
+        <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:900;margin-bottom:10px">
+          Матрица <span style="background:linear-gradient(90deg,#f87171,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">угроз DDC</span>
+        </h1>
+        <p style="color:var(--muted);font-size:15px;max-width:560px">Интерактивная карта кибератак по MITRE ATT&CK, тепловая карта инцидентов, живой трекер угроз и приоритизация CVE для инфраструктуры НБ РК</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:12px;padding:12px 20px;text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:28px;font-weight:900;color:#f87171" id="armTotalThreats">2,847</div>
+          <div style="font-size:11px;color:var(--muted)">Угроз сегодня</div>
+        </div>
+        <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:12px;padding:12px 20px;text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:28px;font-weight:900;color:#fbbf24" id="armCritical">12</div>
+          <div style="font-size:11px;color:var(--muted)">Критических</div>
+        </div>
+        <div style="background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:12px 20px;text-align:center">
+          <div style="font-family:'Manrope',sans-serif;font-size:28px;font-weight:900;color:#4ade80">8.4мин</div>
+          <div style="font-size:11px;color:var(--muted)">Время реакции</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:1280px;margin:0 auto;padding:0 48px">
+
+<!-- MITRE ATT&CK Matrix -->
+<div style="margin-top:48px" class="reveal">
+  <div class="eyebrow">MITRE ATT&CK Framework</div>
+  <h2 class="title" style="margin-bottom:6px">Матрица тактик и техник</h2>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:24px">Покрытие детектирования по 14 тактикам MITRE ATT&CK Enterprise. Зелёный — детектируется, жёлтый — частично, красный — не покрыто.</p>
+  <div id="mitreMatrix" style="overflow-x:auto"></div>
+</div>
+
+<!-- Heatmap + Live Incident Feed -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px" class="reveal">
+  <!-- Threat Heatmap -->
+  <div>
+    <div class="eyebrow">Тепловая карта</div>
+    <h2 class="title" style="margin-bottom:6px">Угрозы по часам недели</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Интенсивность атак: часы × дни. Горячие точки = пиковая активность</p>
+    <div id="armHeatmap" style="font-size:0;line-height:0"></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:12px;font-size:11px;color:var(--muted)">
+      <span>Низкая</span>
+      <div style="display:flex;gap:2px">
+        <div style="width:14px;height:14px;border-radius:3px;background:rgba(248,113,113,0.08)"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:rgba(248,113,113,0.25)"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:rgba(248,113,113,0.50)"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:rgba(248,113,113,0.75)"></div>
+        <div style="width:14px;height:14px;border-radius:3px;background:#f87171"></div>
+      </div>
+      <span>Высокая</span>
+    </div>
+  </div>
+
+  <!-- Live Incident Feed -->
+  <div>
+    <div class="eyebrow" style="color:#fbbf24">Live Feed</div>
+    <h2 class="title" style="margin-bottom:6px">Инциденты в реальном времени</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Автообновление каждые 3 секунды. Данные SOC DDC</p>
+    <div id="armIncidentFeed" style="display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto"></div>
+  </div>
+</div>
+
+<!-- CVE Priority Table -->
+<div style="margin-top:48px" class="reveal">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:gap">
+    <div>
+      <div class="eyebrow">Threat Intelligence</div>
+      <h2 class="title" style="margin-bottom:4px">CVE Приоритизация</h2>
+      <p style="font-size:13px;color:var(--muted)">Критические уязвимости, релевантные для инфраструктуры НБ РК. Оценка по CVSS 3.1</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:12px;color:var(--muted)">Фильтр:</span>
+      <button class="arm-filter-btn active" onclick="filterCVE('all',this)" style="padding:5px 12px;font-size:12px;border-radius:6px;border:1px solid var(--border);background:rgba(0,169,143,0.12);color:var(--teal-l);cursor:pointer">Все</button>
+      <button class="arm-filter-btn" onclick="filterCVE('critical',this)" style="padding:5px 12px;font-size:12px;border-radius:6px;border:1px solid rgba(248,113,113,0.3);background:transparent;color:var(--muted);cursor:pointer">Critical</button>
+      <button class="arm-filter-btn" onclick="filterCVE('high',this)" style="padding:5px 12px;font-size:12px;border-radius:6px;border:1px solid rgba(251,191,36,0.3);background:transparent;color:var(--muted);cursor:pointer">High</button>
+    </div>
+  </div>
+  <div id="armCVETable"></div>
+</div>
+
+<!-- Risk Score by System -->
+<div style="margin-top:48px" class="reveal">
+  <div class="eyebrow">Risk Assessment</div>
+  <h2 class="title" style="margin-bottom:6px">Уровень риска по системам</h2>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:24px">Сводный риск-индекс каждой системы DDC. Формула: CVSS × вероятность × критичность бизнеса</p>
+  <div id="armRiskBars" style="display:flex;flex-direction:column;gap:10px"></div>
+</div>
+
+</div><!-- /container -->
+</main>
+
+<script>
+// ═══════════════════════════════════════════════
+//  CONCEPT ARM — DDC Attack Risk Matrix
+// ═══════════════════════════════════════════════
+
+// MITRE ATT&CK Tactics & Techniques (condensed)
+const MITRE_TACTICS = [
+  {id:'TA0001',name:'Reconnaissance',icon:'🔍',techniques:[
+    {id:'T1595',name:'Active Scanning',status:'covered'},
+    {id:'T1596',name:'Search Open Sources',status:'partial'},
+    {id:'T1593',name:'Social Networks',status:'none'},
+  ]},
+  {id:'TA0002',name:'Resource Dev.',icon:'🛠️',techniques:[
+    {id:'T1583',name:'Acquire Infrastructure',status:'partial'},
+    {id:'T1585',name:'Establish Accounts',status:'none'},
+    {id:'T1588',name:'Obtain Capabilities',status:'covered'},
+  ]},
+  {id:'TA0003',name:'Initial Access',icon:'🚪',techniques:[
+    {id:'T1190',name:'Exploit Public App',status:'covered'},
+    {id:'T1566',name:'Phishing',status:'covered'},
+    {id:'T1199',name:'Trusted Relationship',status:'partial'},
+    {id:'T1078',name:'Valid Accounts',status:'covered'},
+  ]},
+  {id:'TA0004',name:'Execution',icon:'⚡',techniques:[
+    {id:'T1059',name:'Command & Scripting',status:'covered'},
+    {id:'T1204',name:'User Execution',status:'partial'},
+    {id:'T1047',name:'WMI',status:'covered'},
+  ]},
+  {id:'TA0005',name:'Persistence',icon:'🔒',techniques:[
+    {id:'T1098',name:'Account Manipulation',status:'covered'},
+    {id:'T1136',name:'Create Account',status:'covered'},
+    {id:'T1543',name:'System Services',status:'partial'},
+  ]},
+  {id:'TA0006',name:'Priv. Escalation',icon:'⬆️',techniques:[
+    {id:'T1068',name:'Exploit Vulnerability',status:'covered'},
+    {id:'T1548',name:'Abuse Elevation',status:'partial'},
+    {id:'T1078',name:'Valid Accounts',status:'covered'},
+  ]},
+  {id:'TA0007',name:'Defense Evasion',icon:'👻',techniques:[
+    {id:'T1070',name:'Indicator Removal',status:'partial'},
+    {id:'T1036',name:'Masquerading',status:'covered'},
+    {id:'T1027',name:'Obfuscated Files',status:'partial'},
+    {id:'T1055',name:'Process Injection',status:'covered'},
+  ]},
+  {id:'TA0008',name:'Credential Access',icon:'🔑',techniques:[
+    {id:'T1110',name:'Brute Force',status:'covered'},
+    {id:'T1003',name:'OS Credentials',status:'covered'},
+    {id:'T1558',name:'Kerberoasting',status:'partial'},
+  ]},
+  {id:'TA0009',name:'Discovery',icon:'🗺️',techniques:[
+    {id:'T1083',name:'File Discovery',status:'covered'},
+    {id:'T1046',name:'Network Scan',status:'covered'},
+    {id:'T1082',name:'System Info',status:'covered'},
+  ]},
+  {id:'TA0010',name:'Lateral Movement',icon:'↔️',techniques:[
+    {id:'T1021',name:'Remote Services',status:'partial'},
+    {id:'T1550',name:'Alternate Auth',status:'covered'},
+    {id:'T1534',name:'Internal Spearphish',status:'none'},
+  ]},
+  {id:'TA0011',name:'Collection',icon:'📦',techniques:[
+    {id:'T1213',name:'Data from Repos',status:'covered'},
+    {id:'T1530',name:'Cloud Storage',status:'partial'},
+    {id:'T1056',name:'Input Capture',status:'covered'},
+  ]},
+  {id:'TA0012',name:'C2',icon:'📡',techniques:[
+    {id:'T1071',name:'App Layer Protocol',status:'covered'},
+    {id:'T1095',name:'Non-App Layer',status:'partial'},
+    {id:'T1572',name:'Protocol Tunneling',status:'covered'},
+  ]},
+  {id:'TA0013',name:'Exfiltration',icon:'📤',techniques:[
+    {id:'T1041',name:'Exfil over C2',status:'covered'},
+    {id:'T1048',name:'Exfil Alt Proto',status:'partial'},
+    {id:'T1537',name:'Transfer Cloud',status:'none'},
+  ]},
+  {id:'TA0040',name:'Impact',icon:'💥',techniques:[
+    {id:'T1485',name:'Data Destruction',status:'covered'},
+    {id:'T1489',name:'Service Stop',status:'covered'},
+    {id:'T1490',name:'Inhibit Recovery',status:'partial'},
+    {id:'T1498',name:'Network DoS',status:'covered'},
+  ]},
+];
+
+const STATUS_COLOR = {covered:'#4ade80',partial:'#fbbf24',none:'#f87171'};
+const STATUS_BG = {covered:'rgba(74,222,128,0.12)',partial:'rgba(251,191,36,0.1)',none:'rgba(248,113,113,0.1)'};
+const STATUS_LABEL = {covered:'✓',partial:'◑',none:'✗'};
+
+function buildMitreMatrix() {
+  const el = document.getElementById('mitreMatrix');
+  if(!el) return;
+  let html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;">';
+  MITRE_TACTICS.forEach((tactic,i) => {
+    const covered = tactic.techniques.filter(t=>t.status==='covered').length;
+    const total = tactic.techniques.length;
+    const pct = Math.round(covered/total*100);
+    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;position:relative;overflow:hidden;cursor:default" title="${tactic.id}">
+      <div style="position:absolute;top:0;left:0;width:${pct}%;height:3px;background:linear-gradient(90deg,#4ade80,var(--teal));border-radius:2px"></div>
+      <div style="font-size:18px;margin-bottom:6px">${tactic.icon}</div>
+      <div style="font-size:10px;font-weight:700;color:var(--teal-l);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em">${tactic.id}</div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:8px;line-height:1.3">${tactic.name}</div>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        ${tactic.techniques.map(t=>`<div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)">
+          <span style="color:${STATUS_COLOR[t.status]};font-weight:700;min-width:10px">${STATUS_LABEL[t.status]}</span>
+          <span style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${t.name}</span>
+        </div>`).join('')}
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:${pct>=80?'#4ade80':pct>=50?'#fbbf24':'#f87171'};font-weight:700">${pct}% покрыто</div>
+    </div>`;
+    if((i+1)%7===0 && i<MITRE_TACTICS.length-1) html += '</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:8px">';
+  });
+  html += '</div>';
+  // Legend
+  html += `<div style="display:flex;gap:20px;margin-top:12px;font-size:12px;color:var(--muted)">
+    <span style="color:#4ade80">✓ Детектируется</span>
+    <span style="color:#fbbf24">◑ Частично</span>
+    <span style="color:#f87171">✗ Не покрыто</span>
+  </div>`;
+  el.innerHTML = html;
+}
+
+// Heatmap: 7 days × 24 hours
+const DAYS = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+function buildHeatmap() {
+  const el = document.getElementById('armHeatmap');
+  if(!el) return;
+  // Peak hours: 2-4am, 10-12, 15-17 (business days heavier)
+  let html = '<table style="border-collapse:collapse;width:100%">';
+  html += '<tr><th style="width:32px"></th>';
+  for(let h=0;h<24;h++) html += `<th style="font-size:9px;color:var(--dim);padding:0 1px;text-align:center;font-weight:400">${h%4===0?h+':00':''}</th>`;
+  html += '</tr>';
+  DAYS.forEach((day,d) => {
+    html += `<tr><td style="font-size:11px;color:var(--muted);padding:2px 6px 2px 0;white-space:nowrap">${day}</td>`;
+    for(let h=0;h<24;h++) {
+      const weekday = d<5;
+      let base = weekday ? 0.15 : 0.05;
+      if(h>=2&&h<=4) base += 0.4;
+      if(h>=10&&h<=12) base += weekday?0.3:0.1;
+      if(h>=14&&h<=17) base += weekday?0.35:0.1;
+      if(h>=22||h<=1) base += 0.2;
+      const noise = (Math.sin(d*7+h*13+d*h)*0.5+0.5)*0.15;
+      const v = Math.min(1, base+noise);
+      const alpha = (0.05 + v*0.95).toFixed(2);
+      html += `<td style="padding:1px"><div style="width:100%;height:14px;border-radius:2px;background:rgba(248,113,113,${alpha})" title="${day} ${h}:00 — интенсивность ${Math.round(v*100)}%"></div></td>`;
+    }
+    html += '</tr>';
+  });
+  html += '</table>';
+  el.innerHTML = html;
+}
+
+// Live Incident Feed
+const INCIDENT_TYPES = [
+  {type:'DDoS',icon:'🌊',color:'#f87171',severity:'critical'},
+  {type:'Phishing',icon:'🎣',color:'#fbbf24',severity:'high'},
+  {type:'Malware',icon:'🦠',color:'#a78bfa',severity:'critical'},
+  {type:'Brute Force',icon:'🔨',color:'#60a5fa',severity:'medium'},
+  {type:'SQL Injection',icon:'💉',color:'#34d399',severity:'high'},
+  {type:'Ransomware',icon:'💰',color:'#f97316',severity:'critical'},
+  {type:'Port Scan',icon:'🔍',color:'#6b7280',severity:'low'},
+  {type:'Credential Stuffing',icon:'🔑',color:'#ec4899',severity:'high'},
+];
+const SOURCES = ['185.220.101.x','91.108.4.x','45.14.x.x','195.62.x.x','103.251.x.x','178.62.x.x'];
+const TARGETS = ['Open Banking API','Digital Tenge Node','SIEM Collector','Auth Gateway','NB Payment Hub','KYC Service'];
+
+let incidentLog = [];
+function addIncident() {
+  const t = INCIDENT_TYPES[Math.floor(Math.random()*INCIDENT_TYPES.length)];
+  const src = SOURCES[Math.floor(Math.random()*SOURCES.length)];
+  const tgt = TARGETS[Math.floor(Math.random()*TARGETS.length)];
+  const now = new Date();
+  const time = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+  incidentLog.unshift({...t, src, tgt, time, id:'INC-'+String(Math.floor(Math.random()*9000)+1000)});
+  if(incidentLog.length>20) incidentLog.pop();
+  renderIncidents();
+  // Update counters
+  const el = document.getElementById('armTotalThreats');
+  if(el) el.textContent = (parseInt(el.textContent.replace(',',''))+1).toLocaleString();
+  if(t.severity==='critical') {
+    const c = document.getElementById('armCritical');
+    if(c) c.textContent = parseInt(c.textContent)+1;
+  }
+}
+function renderIncidents() {
+  const el = document.getElementById('armIncidentFeed');
+  if(!el) return;
+  el.innerHTML = incidentLog.slice(0,8).map((inc,i) => `
+    <div style="display:flex;align-items:center;gap:10px;background:rgba(${inc.severity==='critical'?'248,113,113':inc.severity==='high'?'251,191,36':'96,165,250'},0.06);border:1px solid rgba(${inc.severity==='critical'?'248,113,113':inc.severity==='high'?'251,191,36':'96,165,250'},0.2);border-radius:8px;padding:8px 12px;${i===0?'animation:fadeIn .3s ease':''}">
+      <span style="font-size:18px">${inc.icon}</span>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;font-weight:700;color:${inc.color}">${inc.type}</span>
+          <span style="font-size:10px;color:var(--dim)">${inc.id}</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${inc.src} → ${inc.tgt}</div>
+      </div>
+      <div style="font-size:10px;color:var(--dim);white-space:nowrap">${inc.time}</div>
+    </div>`).join('');
+}
+
+// CVE Data
+const ARM_CVES = [
+  {id:'CVE-2024-3400',score:10.0,level:'critical',vendor:'Palo Alto PAN-OS',desc:'Инъекция команд в GlobalProtect — активно эксплуатируется',affected:'Периметр',status:'patch'},
+  {id:'CVE-2024-47177',score:9.8,level:'critical',vendor:'OpenSSH',desc:'Remote Code Execution через уязвимость аутентификации',affected:'Серверы',status:'patch'},
+  {id:'CVE-2024-38063',score:9.8,level:'critical',vendor:'Windows TCP/IP',desc:'RCE без аутентификации через IPv6 пакеты',affected:'Рабочие станции',status:'mitigate'},
+  {id:'CVE-2024-21762',score:9.6,level:'critical',vendor:'Fortinet FortiOS',desc:'Out-of-bounds write в SSL VPN, выполнение кода без аутентификации',affected:'VPN шлюзы',status:'patch'},
+  {id:'CVE-2024-6387',score:8.1,level:'high',vendor:'OpenSSH regreSSHion',desc:'Race condition — RCE под root через 6-8 часов атаки',affected:'Linux серверы',status:'patch'},
+  {id:'CVE-2024-29973',score:8.1,level:'high',vendor:'Zyxel NAS',desc:'Command injection через CGI параметр без аутентификации',affected:'Хранилища',status:'monitor'},
+  {id:'CVE-2024-20399',score:7.2,level:'high',vendor:'Cisco NX-OS',desc:'CLI уязвимость — root-привилегии для аутентифицированного пользователя',affected:'Сетевое оборуд.',status:'monitor'},
+];
+let cveFilter = 'all';
+function filterCVE(f, btn) {
+  cveFilter = f;
+  document.querySelectorAll('.arm-filter-btn').forEach(b=>{
+    b.style.background='transparent'; b.style.color='var(--muted)';
+  });
+  btn.style.background='rgba(0,169,143,0.12)'; btn.style.color='var(--teal-l)';
+  renderCVETable();
+}
+function renderCVETable() {
+  const el = document.getElementById('armCVETable');
+  if(!el) return;
+  const data = cveFilter==='all'?ARM_CVES:ARM_CVES.filter(c=>c.level===cveFilter);
+  const STATUS_MAP = {patch:{label:'Патч доступен',color:'#4ade80'},mitigate:{label:'Митигация',color:'#fbbf24'},monitor:{label:'Мониторинг',color:'#60a5fa'}};
+  el.innerHTML = `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">
+    <thead><tr style="border-bottom:1px solid var(--border)">
+      <th style="text-align:left;padding:10px 12px;font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase">CVE ID</th>
+      <th style="text-align:center;padding:10px 12px;font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase">CVSS</th>
+      <th style="text-align:left;padding:10px 12px;font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase">Продукт</th>
+      <th style="text-align:left;padding:10px 12px;font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase">Описание</th>
+      <th style="text-align:left;padding:10px 12px;font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase">Затронуто</th>
+      <th style="text-align:center;padding:10px 12px;font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase">Статус</th>
+    </tr></thead>
+    <tbody>${data.map(c=>{
+      const lvlC = c.level==='critical'?'#f87171':'#fbbf24';
+      const st = STATUS_MAP[c.status];
+      return `<tr style="border-bottom:1px solid rgba(255,255,255,0.04);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background='transparent'">
+        <td style="padding:12px"><span style="font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:${lvlC}">${c.id}</span></td>
+        <td style="padding:12px;text-align:center">
+          <span style="background:${c.score>=9?'rgba(248,113,113,0.15)':'rgba(251,191,36,0.12)'};border:1px solid ${lvlC}33;color:${lvlC};border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;font-family:'Manrope',sans-serif">${c.score}</span>
+        </td>
+        <td style="padding:12px;font-size:13px;font-weight:600">${c.vendor}</td>
+        <td style="padding:12px;font-size:12px;color:var(--muted);max-width:240px">${c.desc}</td>
+        <td style="padding:12px;font-size:12px;color:var(--muted)">${c.affected}</td>
+        <td style="padding:12px;text-align:center"><span style="background:rgba(${st.color==='#4ade80'?'74,222,128':st.color==='#fbbf24'?'251,191,36':'96,165,250'},0.1);border:1px solid ${st.color}44;color:${st.color};border-radius:6px;padding:3px 10px;font-size:11px;white-space:nowrap">${st.label}</span></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table></div>`;
+}
+
+// Risk bars per system
+const RISK_SYSTEMS = [
+  {name:'Open Banking API',risk:82,color:'#f87171',issues:4},
+  {name:'Digital Tenge Node',risk:61,color:'#fbbf24',issues:2},
+  {name:'Auth Gateway / IAM',risk:55,color:'#fbbf24',issues:3},
+  {name:'SOC SIEM (Wazuh)',risk:38,color:'#4ade80',issues:1},
+  {name:'NB Payment Hub',risk:71,color:'#f97316',issues:3},
+  {name:'KYC / AML Service',risk:44,color:'#4ade80',issues:1},
+  {name:'Data Center Core',risk:29,color:'#4ade80',issues:0},
+];
+function buildRiskBars() {
+  const el = document.getElementById('armRiskBars');
+  if(!el) return;
+  el.innerHTML = RISK_SYSTEMS.map(s=>`
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:180px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
+      <div style="flex:1;height:12px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden">
+        <div style="height:100%;width:${s.risk}%;background:linear-gradient(90deg,${s.color}aa,${s.color});border-radius:6px;transition:width 1s ease"></div>
+      </div>
+      <div style="width:40px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:${s.color};text-align:right">${s.risk}</div>
+      <div style="width:60px;font-size:11px;color:var(--muted);text-align:right">${s.issues} CVE</div>
+    </div>`).join('');
+}
+
+// Init
+function initARM() {
+  buildMitreMatrix();
+  buildHeatmap();
+  renderIncidents();
+  renderCVETable();
+  buildRiskBars();
+  setInterval(addIncident, 2800 + Math.random()*1200);
+}
+if(document.readyState==='complete') initARM();
+else document.addEventListener('DOMContentLoaded', initARM);
+</script>

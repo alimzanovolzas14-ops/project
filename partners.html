@@ -1,0 +1,48 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Партнёры и заказчики</div>
+    <h1 data-ru="Наши партнёры" data-kz="Біздің серіктестер" data-en="Our Partners">Наши партнёры</h1>
+    <p data-ru="Государственные органы, финансовые организации и международные технологические партнёры" data-kz="Мемлекеттік органдар, қаржылық ұйымдар және халықаралық технологиялық серіктестер" data-en="Government agencies, financial organizations and international technology partners">Государственные органы, финансовые организации и международные технологические партнёры</p>
+  </div>
+  
+  <div class="page-content">
+    <div class="section-wrap">
+    <div class="section-hd">
+      <div class="eyebrow" data-i18n="partLabel">Экосистема</div>
+      <h2 class="title" data-i18n="partTitle">Наши партнёры</h2>
+      <div class="divider"></div>
+      <p class="subtitle" data-i18n="partSub">Государственные организации, университеты и международные технологические компании</p>
+    </div>
+    <div class="partner-grid reveal">
+      <div class="partner-chip">🏦 Национальный Банк РК</div>
+      <div class="partner-chip">🏛️ Правительство РК</div>
+      <div class="partner-chip">🎓 Nazarbayev University</div>
+      <div class="partner-chip">🎓 КБТУ</div>
+      <div class="partner-chip">🌐 МЦРИАП</div>
+      <div class="partner-chip">☁️ AWS Kazakhstan</div>
+      <div class="partner-chip">🔵 Microsoft Azure</div>
+      <div class="partner-chip">🔴 Oracle</div>
+      <div class="partner-chip">🟥 Red Hat</div>
+      <div class="partner-chip">🔐 Kaspersky</div>
+      <div class="partner-chip">🛡️ Palo Alto Networks</div>
+      <div class="partner-chip">🌍 SWIFT</div>
+    </div>
+  </div>
+<div style="max-width:1280px;margin:0 auto;padding:0 48px">
+    <div class="section-hd">
+      <div class="eyebrow">Экосистема партнёров</div>
+      <h2 class="title">Заказчики и партнёры</h2>
+      <div class="divider"></div>
+      <p class="subtitle">Государственные органы, финансовые организации и международные технологические партнёры</p>
+    </div>
+    <div class="partners-cats">
+      <button class="partner-cat-btn active" onclick="filterPartners('all',this)">Все</button>
+      <button class="partner-cat-btn" onclick="filterPartners('gov',this)">🏛️ Госорганы</button>
+      <button class="partner-cat-btn" onclick="filterPartners('bank',this)">🏦 Банки</button>
+      <button class="partner-cat-btn" onclick="filterPartners('tech',this)">💻 Технологии</button>
+      <button class="partner-cat-btn" onclick="filterPartners('edu',this)">🎓 Образование</button>
+    </div>
+    <div class="partners-logo-grid" id="partnersGrid"></div>
+  </div>
+  </div>
+</main>

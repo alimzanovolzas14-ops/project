@@ -1,0 +1,25 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Медиацентр</div>
+    <h1 data-ru="Новости и публикации" data-kz="Жаңалықтар мен жарияланымдар" data-en="News & Publications">Новости и публикации</h1>
+    <p data-ru="Последние события, пресс-релизы, аналитика и публикации DDC" data-kz="Соңғы оқиғалар, баспасөз хабарламалары, аналитика және DDC жарияланымдары" data-en="Latest events, press releases, analytics and publications from DDC">Последние события, пресс-релизы, аналитика и публикации DDC</p>
+  </div>
+  
+  <div class="page-content">
+    <div class="section-wrap">
+    <div class="section-hd">
+      <div class="eyebrow" data-i18n="newsLabel">Медиацентр</div>
+      <h2 class="title" data-i18n="newsTitle">Новости и публикации</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="news-filters">
+      <button class="news-filter active" onclick="filterNews('all',this)" data-i18n="newsAll">Все</button>
+      <button class="news-filter" onclick="filterNews('cyber',this)" data-i18n="newsCyber">Кибербезопасность</button>
+      <button class="news-filter" onclick="filterNews('fintech',this)" data-i18n="newsFintech">FinTech</button>
+      <button class="news-filter" onclick="filterNews('ai',this)" data-i18n="newsAI">AI</button>
+      <button class="news-filter" onclick="filterNews('gov',this)" data-i18n="newsGov">eGov</button>
+    </div>
+    <div class="news-grid" id="newsGrid"></div>
+  </div>
+  </div>
+</main>

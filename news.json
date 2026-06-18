@@ -1,0 +1,21 @@
+// NEWS data
+const NEWS = [
+  {cat:'cyber',date:'12.06.2025',
+   title:{ru:'DDC обнаружил новую волну фишинговых атак на банки Казахстана',kz:'DDC Қазақстан банктеріне жаңа фишинг шабуылдарын анықтады',en:'DDC Detected New Wave of Phishing Attacks on Kazakhstan Banks'},
+   text:{ru:'SOC-команда DDC зафиксировала серию целевых фишинговых атак, направленных на сотрудников финансовых организаций.',kz:'DDC SOC командасы қаржы ұйымдарының қызметкерлеріне бағытталған фишинг шабуылдарын анықтады.',en:'The DDC SOC team recorded a series of targeted phishing attacks aimed at employees of financial organizations.'}},
+  {cat:'fintech',date:'08.06.2025',
+   title:{ru:'Количество пользователей Digital Tenge превысило 500 000',kz:'Digital Tenge пайдаланушылары 500 000-нан асты',en:'Digital Tenge Users Exceed 500,000'},
+   text:{ru:'Платформа цифрового тенге продолжает активный рост: ежемесячный оборот достиг ₸2.3 миллиарда.',kz:'Цифрлық теңге платформасы белсенді өсімін жалғастыруда: ай сайынғы айналым ₸2.3 млрд-қа жетті.',en:'The digital tenge platform continues active growth: monthly turnover has reached ₸2.3 billion.'}},
+  {cat:'ai',date:'03.06.2025',
+   title:{ru:'DDC запустил многоязычный AI-ассистент для госпорталов',kz:'DDC мемлекеттік порталдарға арналған көптілді AI-көмекшісін іске қосты',en:'DDC Launched Multilingual AI Assistant for Government Portals'},
+   text:{ru:'Новый AI-ассистент обрабатывает обращения граждан на казахском, русском и английском языках в режиме реального времени.',kz:'Жаңа AI-көмекші қазақ, орыс және ағылшын тілдерінде азаматтардың өтініштерін нақты уақытта өңдейді.',en:'The new AI assistant processes citizen requests in Kazakh, Russian and English in real time.'}},
+  {cat:'gov',date:'28.05.2025',
+   title:{ru:'Интеграция Smart Bridge расширена до 47 государственных систем',kz:'Smart Bridge интеграциясы 47 мемлекеттік жүйеге дейін кеңейтілді',en:'Smart Bridge Integration Expanded to 47 Government Systems'},
+   text:{ru:'Платформа государственной интеграции Smart Bridge теперь обеспечивает бесшовный обмен данными между 47 ведомственными системами.',kz:'Smart Bridge мемлекеттік интеграция платформасы енді 47 ведомстволық жүйе арасындағы деректер алмасуын қамтамасыз етеді.',en:'The Smart Bridge government integration platform now provides seamless data exchange between 47 departmental systems.'}},
+  {cat:'cyber',date:'20.05.2025',
+   title:{ru:'DDC провёл учения Cyber Range с 200 специалистами',kz:'DDC 200 маманмен Cyber Range жаттығулары өткізді',en:'DDC Conducted Cyber Range Exercises with 200 Specialists'},
+   text:{ru:'В рамках учений специалисты Blue Team и Red Team отработали сценарии защиты критической инфраструктуры.',kz:'Жаттығулар барысында Blue Team және Red Team мамандары маңызды инфрақұрылымды қорғау сценарийлерін жаттықты.',en:'During the exercises, Blue Team and Red Team specialists practiced critical infrastructure protection scenarios.'}},
+  {cat:'ai',date:'15.05.2025',
+   title:{ru:'Модель детекции аномалий DDC достигла точности 94%',kz:'DDC аномалияларды анықтау моделі 94% дәлдікке жетті',en:'DDC Anomaly Detection Model Reaches 94% Accuracy'},
+   text:{ru:'Новая ML-модель для выявления мошеннических транзакций показала точность 94% на тестовой выборке из 10 миллионов операций.',kz:'Алаяқтық транзакцияларды анықтауға арналған жаңа ML модель 10 миллион операцияда 94% дәлдік көрсетті.',en:'The new ML model for detecting fraudulent transactions showed 94% accuracy on a test sample of 10 million operations.'}},
+];

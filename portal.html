@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DDC — Корпоративный портал сотрудников</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0f1a;--bg2:#0d1425;--bg3:#111827;
+  --card:#131e32;--card2:#1a2540;
+  --border:rgba(99,179,237,0.12);--border2:rgba(255,255,255,0.06);
+  --text:#e8f0fe;--muted:rgba(232,240,254,0.55);--dim:rgba(232,240,254,0.28);
+  --teal:#00d4aa;--teal2:#00b4d8;
+  --blue:#3b82f6;--blue2:#60a5fa;
+  --grad:linear-gradient(135deg,#00d4aa,#3b82f6);
+  --grad2:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  --red:#f87171;--yellow:#fbbf24;--green:#4ade80;--purple:#a78bfa;
+}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:3px}
+
+/* ── AUTH ── */
+#authScreen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(59,130,246,0.08),transparent),var(--bg)}
+.auth-logo{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.auth-logo-icon{font-family:'Manrope',sans-serif;font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.auth-logo-name{font-size:17px;color:var(--muted);font-weight:400}
+.auth-sub{font-size:13px;color:var(--dim);margin-bottom:40px;letter-spacing:.02em}
+.auth-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:36px;width:100%;max-width:480px;box-shadow:0 24px 64px rgba(0,0,0,0.5)}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,0.04);border-radius:12px;padding:4px;margin-bottom:28px}
+.auth-tab{padding:12px;border-radius:9px;border:none;background:transparent;color:var(--muted);font-size:14px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .2s}
+.auth-tab.active{background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,0.3)}
+.auth-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;margin-top:18px}
+.auth-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:12px;padding:14px 16px;color:var(--text);font-size:14px;outline:none;font-family:'Inter',sans-serif;transition:border-color .2s}
+.auth-input:focus{border-color:rgba(59,130,246,0.5);background:rgba(59,130,246,0.04)}
+.auth-input::placeholder{color:var(--dim)}
+.pass-wrap{position:relative}
+.pass-wrap .auth-input{padding-right:44px}
+.pass-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px}
+.auth-btn{width:100%;background:var(--grad);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px;transition:opacity .2s;box-shadow:0 8px 24px rgba(59,130,246,0.25)}
+.auth-btn:hover{opacity:.88}
+.auth-err{font-size:12px;color:var(--red);margin-top:10px;text-align:center;display:none}
+.auth-hint{font-size:11px;color:var(--dim);text-align:center;margin-top:16px}
+.demo-users{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.demo-user-btn{background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:10px;padding:10px 12px;cursor:pointer;text-align:left;transition:all .2s}
+.demo-user-btn:hover{background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.3)}
+.demo-user-name{font-size:12px;font-weight:700;color:var(--text)}
+.demo-user-role{font-size:10px;color:var(--muted);margin-top:2px}
+select.auth-input{cursor:pointer}
+
+/* ── PORTAL SHELL ── */
+#portalShell{display:none;min-height:100vh}
+.shell-aside{position:fixed;top:0;left:0;width:260px;height:100vh;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;transition:transform .3s}
+.aside-logo{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
+.aside-logo-top{display:flex;align-items:center;gap:10px}
+.aside-logo-d{font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.aside-logo-text{font-size:13px;font-weight:700}
+.aside-logo-sub{font-size:10px;color:var(--dim);margin-top:2px}
+.aside-user{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.aside-avatar{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
+.aside-uname{font-size:13px;font-weight:700;line-height:1.3}
+.aside-urole{font-size:10px;color:var(--muted)}
+.aside-nav{flex:1;overflow-y:auto;padding:12px 8px}
+.nav-section{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:12px 10px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;color:var(--muted);transition:all .15s;margin-bottom:2px;text-decoration:none}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text)}
+.nav-item.active{background:rgba(59,130,246,0.1);color:var(--blue2);font-weight:600}
+.nav-item .ni{font-size:16px;min-width:20px;text-align:center}
+.nav-badge{margin-left:auto;background:var(--grad);color:#fff;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700}
+.aside-footer{padding:12px 16px;border-top:1px solid var(--border)}
+.aside-logout{display:flex;align-items:center;gap:8px;color:var(--red);font-size:13px;cursor:pointer;padding:8px 10px;border-radius:8px;transition:background .15s}
+.aside-logout:hover{background:rgba(248,113,113,0.08)}
+.shell-main{margin-left:260px;min-height:100vh;background:var(--bg)}
+.shell-topbar{background:var(--card);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-family:'Manrope',sans-serif;font-size:18px;font-weight:800}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-notif{position:relative;cursor:pointer;padding:8px;border-radius:9px;border:1px solid var(--border2);font-size:16px;transition:background .15s}
+.topbar-notif:hover{background:rgba(255,255,255,0.04)}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:#f87171;border-radius:50%;border:2px solid var(--card)}
+.topbar-avatar{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:12px;color:#fff;cursor:pointer}
+.shell-content{padding:32px}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block}
+.page-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.page-title{font-family:'Manrope',sans-serif;font-size:28px;font-weight:900;margin-bottom:6px}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:28px}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}
+.card2{background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:16px}
+
+/* ── GRIDS ── */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+/* ── KPI CARDS ── */
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px}
+.kpi-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.kpi-val{font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.kpi-lbl{font-size:11px;color:var(--muted);margin-top:3px}
+
+/* ── PROFILE ── */
+.profile-hero{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.08));border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:20px;display:flex;align-items:center;gap:24px}
+.profile-av-wrap{position:relative}
+.profile-av{width:80px;height:80px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:900;font-size:28px;color:#fff;flex-shrink:0}
+.profile-av-badge{position:absolute;bottom:-4px;right:-4px;background:var(--green);border:2px solid var(--card);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px}
+.skill-bar-wrap{flex:1;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.skill-bar{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── COURSES ── */
+.course-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s}
+.course-card:hover{border-color:rgba(59,130,246,0.35);transform:translateY(-2px)}
+.course-badge{display:inline-flex;align-items:center;gap:6px;border-radius:7px;padding:4px 10px;font-size:10px;font-weight:700}
+.progress-ring{position:relative;width:52px;height:52px;flex-shrink:0}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800}
+
+/* ── COLLEAGUES ── */
+.colleague-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color .2s}
+.colleague-card:hover{border-color:rgba(59,130,246,0.3)}
+.dept-pill{display:inline-block;border-radius:6px;padding:3px 9px;font-size:10px;font-weight:700}
+
+/* ── NEWS/FEED ── */
+.feed-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border2)}
+.feed-item:last-child{border-bottom:none}
+.feed-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+
+/* ── ORG ── */
+.org-box{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px 18px;text-align:center;cursor:pointer;transition:all .2s}
+.org-box:hover{border-color:rgba(59,130,246,0.4);background:rgba(59,130,246,0.06)}
+.org-box.selected{border-color:var(--blue);background:rgba(59,130,246,0.1)}
+
+/* ── BOARD ── */
+.board-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;gap:18px;align-items:start}
+.board-av{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:900;font-size:18px;color:#fff;flex-shrink:0}
+
+/* ── MISC ── */
+.tag{display:inline-block;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--grad);color:#fff}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.divider{height:1px;background:var(--border);margin:20px 0}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--blue);cursor:pointer}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid rgba(74,222,128,0.3);color:#4ade80;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;z-index:9999;animation:slideUp .3s ease;display:none}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* mobile */
+.menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:4px}
+@media(max-width:900px){
+  .shell-aside{transform:translateX(-100%)}
+  .shell-aside.open{transform:translateX(0)}
+  .shell-main{margin-left:0}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .menu-toggle{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ AUTH ═══════════════════════════════════ -->
+<div id="authScreen">
+  <div class="auth-logo">
+    <span class="auth-logo-icon">DDC</span>
+    <span class="auth-logo-name">Digital Development Center</span>
+  </div>
+  <div class="auth-sub">Корпоративный портал сотрудников</div>
+
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Войти</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Регистрация</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <div class="auth-label">EMAIL</div>
+      <input id="loginEmail" class="auth-input" type="email" placeholder="your@ddc.kz" autocomplete="email">
+      <div class="auth-label">ПАРОЛЬ</div>
+      <div class="pass-wrap">
+        <input id="loginPass" class="auth-input" type="password" placeholder="••••••••">
+        <button class="pass-eye" onclick="togglePass('loginPass',this)">👁</button>
+      </div>
+      <div id="loginErr" class="auth-err">Неверный email или пароль</div>
+      <button class="auth-btn" onclick="doLogin()">→ Войти</button>
+      <div class="auth-hint">Или выберите демо-профиль:</div>
+      <div class="demo-users" id="demoUsers"></div>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="display:none">
+      <div class="auth-label">ФИО</div>
+      <input id="regName" class="auth-input" type="text" placeholder="Иванов Иван Иванович">
+      <div class="auth-label">EMAIL КОРПОРАТИВНЫЙ</div>
+      <input id="regEmail" class="auth-input" type="email" placeholder="ivan.ivanov@ddc.kz">
+      <div class="auth-label">ОТДЕЛ</div>
+      <select id="regDept" class="auth-input">
+        <option value="">— Выберите отдел —</option>
+        <option value="cyber">Кибербезопасность / SOC</option>
+        <option value="ai">AI Lab / ML</option>
+        <option value="dev">Разработка (Backend/Frontend)</option>
+        <option value="data">Data Engineering / Data Science</option>
+        <option value="cloud">Cloud / DevOps / Infrastructure</option>
+        <option value="fintech">FinTech / Digital Tenge</option>
+        <option value="mgmt">Управление / PMO</option>
+      </select>
+      <div class="auth-label">ДОЛЖНОСТЬ</div>
+      <input id="regRole" class="auth-input" type="text" placeholder="Junior Developer">
+      <div class="auth-label">ПАРОЛЬ</div>
+      <div class="pass-wrap">
+        <input id="regPass" class="auth-input" type="password" placeholder="Минимум 6 символов">
+        <button class="pass-eye" onclick="togglePass('regPass',this)">👁</button>
+      </div>
+      <div id="regErr" class="auth-err">Заполните все поля</div>
+      <div id="regOk" style="font-size:12px;color:var(--green);margin-top:10px;text-align:center;display:none">✅ Аккаунт создан! Входим...</div>
+      <button class="auth-btn" onclick="doRegister()">✦ Создать аккаунт</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ PORTAL SHELL ═══════════════════════════════════ -->
+<div id="portalShell">
+  <!-- Sidebar -->
+  <aside class="shell-aside" id="shellAside">
+    <div class="aside-logo">
+      <div class="aside-logo-top">
+        <span class="aside-logo-d">DDC</span>
+        <div>
+          <div class="aside-logo-text">Digital Dev Center</div>
+          <div class="aside-logo-sub">NB Kazakhstan</div>
+        </div>
+      </div>
+    </div>
+    <div class="aside-user" id="asideUser"></div>
+    <nav class="aside-nav">
+      <div class="nav-section">Основное</div>
+      <div class="nav-item active" onclick="showPage('dashboard',this)"><span class="ni">🏠</span> Главная</div>
+      <div class="nav-item" onclick="showPage('profile',this)"><span class="ni">👤</span> Мой профиль</div>
+
+      <div class="nav-section">Команда</div>
+      <div class="nav-item" onclick="showPage('colleagues',this)"><span class="ni">👥</span> Коллеги</div>
+      <div class="nav-item" onclick="showPage('org',this)"><span class="ni">📊</span> Структура DDC</div>
+      <div class="nav-item" onclick="showPage('board',this)"><span class="ni">🏛️</span> Совет директоров</div>
+
+      <div class="nav-section">Развитие</div>
+      <div class="nav-item" onclick="showPage('courses',this)"><span class="ni">📚</span> Обучение <span class="nav-badge" id="badgeCourses">9</span></div>
+      <div class="nav-item" onclick="showPage('certifications',this)"><span class="ni">🏆</span> Сертификаты</div>
+
+      <div class="nav-section">Компания</div>
+      <div class="nav-item" onclick="showPage('news',this)"><span class="ni">📰</span> Новости DDC</div>
+      <div class="nav-item" onclick="showPage('projects',this)"><span class="ni">📁</span> Проекты</div>
+    </nav>
+    <div class="aside-footer">
+      <div class="aside-logout" onclick="doLogout()">🚪 Выйти из аккаунта</div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="shell-main">
+    <header class="shell-topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <div class="topbar-title" id="topbarTitle">Главная</div>
+      </div>
+      <div class="topbar-right">
+        <div style="font-size:12px;color:var(--muted)" id="topbarDate"></div>
+        <div class="topbar-notif">🔔<div class="notif-dot"></div></div>
+        <div class="topbar-avatar" id="topbarAv" style="background:var(--grad)">?</div>
+      </div>
+    </header>
+
+    <div class="shell-content">
+
+      <!-- ── PAGE: DASHBOARD ── -->
+      <div class="page active" id="page-dashboard">
+        <div id="welcomeBanner" style="background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(0,212,170,0.08));border:1px solid rgba(59,130,246,0.2);border-radius:20px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+          <div>
+            <div style="font-size:13px;color:var(--teal);font-weight:600;margin-bottom:6px">Добро пожаловать 👋</div>
+            <div style="font-family:'Manrope',sans-serif;font-size:26px;font-weight:900;margin-bottom:6px" id="welcomeName">Имя</div>
+            <div style="font-size:13px;color:var(--muted)" id="welcomeRole">Должность · Отдел</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:end;gap:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green)">
+              <div style="width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite"></div>
+              Онлайн · DDC портал
+            </div>
+            <div style="font-size:11px;color:var(--dim)" id="welcomeTime"></div>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="grid-4" style="margin-bottom:24px">
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(59,130,246,0.12)">📚</div>
+            <div><div class="kpi-val" id="kpiCourses">0</div><div class="kpi-lbl">Курсов пройдено</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(74,222,128,0.1)">🏆</div>
+            <div><div class="kpi-val" id="kpiCerts" style="color:var(--green)">0</div><div class="kpi-lbl">Сертификатов</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(251,191,36,0.1)">⭐</div>
+            <div><div class="kpi-val" style="color:var(--yellow)">4.9</div><div class="kpi-lbl">Рейтинг</div></div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(167,139,250,0.1)">📁</div>
+            <div><div class="kpi-val" id="kpiProjects" style="color:var(--purple)">3</div><div class="kpi-lbl">Проектов</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Learning progress -->
+          <div class="card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+              <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px">📈 Прогресс обучения</div>
+              <div style="font-size:12px;color:var(--teal)" id="progressPct">0%</div>
+            </div>
+            <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;margin-bottom:16px">
+              <div id="progressBar" style="height:100%;background:linear-gradient(90deg,var(--teal),var(--blue));border-radius:4px;transition:width 1s ease;width:0%"></div>
+            </div>
+            <div id="nextCourses" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+
+          <!-- Activity feed -->
+          <div class="card">
+            <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;margin-bottom:14px">⚡ Активность</div>
+            <div id="dashActivity" style="display:flex;flex-direction:column"></div>
+          </div>
+        </div>
+
+        <!-- Colleagues preview -->
+        <div class="card" style="margin-top:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px">👥 Коллеги онлайн</div>
+            <button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showPage('colleagues',document.querySelector('.nav-item:nth-child(5))'))">Все →</button>
+          </div>
+          <div id="dashColleagues" style="display:flex;gap:12px;flex-wrap:wrap"></div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: PROFILE ── -->
+      <div class="page" id="page-profile">
+        <div class="page-eyebrow">Личный кабинет</div>
+        <div class="page-title" id="profileTitle">Мой профиль</div>
+
+        <div class="profile-hero">
+          <div class="profile-av-wrap">
+            <div class="profile-av" id="profAv" style="background:var(--grad)">?</div>
+            <div class="profile-av-badge">✓</div>
+          </div>
+          <div style="flex:1">
+            <div style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;margin-bottom:4px" id="profName">—</div>
+            <div style="font-size:14px;color:var(--blue2);font-weight:600;margin-bottom:4px" id="profRole">—</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="profDept">—</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap" id="profCerts"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;min-width:160px">
+            <div style="text-align:center;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);border-radius:12px;padding:12px">
+              <div style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:900;color:var(--blue2)" id="profCourseCount">0</div>
+              <div style="font-size:11px;color:var(--muted)">Курсов</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Edit profile -->
+          <div class="card">
+            <div style="font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:16px">✏️ Редактировать профиль</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div>
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">ФИО</div>
+                <input id="editName" class="auth-input" type="text" style="font-size:13px;padding:10px 14px">
+              </div>
+              <div>
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Должность</div>
+                <input id="editRole" class="auth-input" type="text" style="font-size:13px;padding:10px 14px">
+              </div>
+              <div>
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">О себе</div>
+                <textarea id="editBio" class="auth-input" rows="3" style="font-size:13px;padding:10px 14px;resize:vertical;font-family:'Inter',sans-serif"></textarea>
+              </div>
+              <button class="btn btn-primary" onclick="saveProfile()">Сохранить изменения</button>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="card">
+            <div style="font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:16px">💡 Компетенции</div>
+            <div id="profSkills" style="display:flex;flex-direction:column;gap:12px"></div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="card" style="margin-top:20px">
+          <div style="font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:16px">📁 Мои проекты</div>
+          <div id="profProjects" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px"></div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: COLLEAGUES ── -->
+      <div class="page" id="page-colleagues">
+        <div class="page-eyebrow">Команда</div>
+        <div class="page-title">Коллеги</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="deptFilterBtns"></div>
+        <div id="colleaguesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px"></div>
+      </div>
+
+      <!-- ── PAGE: ORG ── -->
+      <div class="page" id="page-org">
+        <div class="page-eyebrow">Организационная структура</div>
+        <div class="page-title">АО «ЦЦР НБ РК»</div>
+        <div class="page-sub">Нажмите на отдел для просмотра состава</div>
+        <div style="overflow-x:auto;padding-bottom:16px">
+          <div style="min-width:800px">
+            <div style="display:flex;justify-content:center;margin-bottom:0">
+              <div style="background:linear-gradient(135deg,rgba(0,212,170,0.12),rgba(59,130,246,0.08));border:2px solid rgba(0,212,170,0.4);border-radius:16px;padding:18px 36px;text-align:center">
+                <div style="font-size:22px;margin-bottom:4px">🏛️</div>
+                <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:13px">Председатель Правления</div>
+                <div style="font-size:12px;color:var(--teal);font-weight:600;margin-top:4px">Амардинов М.А.</div>
+              </div>
+            </div>
+            <div style="width:2px;height:28px;background:var(--border);margin:0 auto"></div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+              <div style="width:2px;height:24px;background:var(--border);grid-column:1/-1;margin:0 auto;display:none"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px" id="orgDeptGrid"></div>
+          </div>
+        </div>
+        <div style="margin-top:24px">
+          <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;margin-bottom:14px" id="orgDeptLabel">Выберите отдел</div>
+          <div id="orgEmpGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px"></div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: BOARD ── -->
+      <div class="page" id="page-board">
+        <div class="page-eyebrow">Корпоративное управление</div>
+        <div class="page-title">Совет директоров</div>
+        <div class="page-sub">АО «Центр цифрового развития Национального Банка Казахстана»</div>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px" id="boardGrid"></div>
+        <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;margin-bottom:14px">⚙️ Правление (исполнительный орган)</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px" id="mgmtGrid"></div>
+        <div style="background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.15);border-radius:16px;padding:24px">
+          <div style="font-family:'Manrope',sans-serif;font-weight:700;margin-bottom:16px">📋 Справка об организации</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px">
+            <div><div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Полное название</div><div style="font-size:13px">АО «Центр цифрового развития НБ РК»</div></div>
+            <div><div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Реорганизация</div><div style="font-size:13px">17 июля 2025 г.</div></div>
+            <div><div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Основано</div><div style="font-size:13px">1995 год</div></div>
+            <div><div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Акционер</div><div style="font-size:13px">НБ РК (100%)</div></div>
+            <div><div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Адрес</div><div style="font-size:13px">Астана, пр. Мангилик Ел, 57А</div></div>
+            <div><div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Сайт</div><div style="font-size:13px"><a href="https://ddcnb.kz" target="_blank" style="color:var(--teal)">www.ddcnb.kz</a></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PAGE: COURSES ── -->
+      <div class="page" id="page-courses">
+        <div class="page-eyebrow">Корпоративное обучение</div>
+        <div class="page-title">Учебные курсы</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px" id="courseFilterBtns"></div>
+        <div id="coursesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px"></div>
+      </div>
+
+      <!-- ── PAGE: CERTIFICATIONS ── -->
+      <div class="page" id="page-certifications">
+        <div class="page-eyebrow">Достижения</div>
+        <div class="page-title">Сертификаты и награды</div>
+        <div id="certsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
+      </div>
+
+      <!-- ── PAGE: NEWS ── -->
+      <div class="page" id="page-news">
+        <div class="page-eyebrow">Корпоративные новости</div>
+        <div class="page-title">Новости DDC</div>
+        <div id="newsGrid" style="display:flex;flex-direction:column;gap:16px"></div>
+      </div>
+
+      <!-- ── PAGE: PROJECTS ── -->
+      <div class="page" id="page-projects">
+        <div class="page-eyebrow">Проекты компании</div>
+        <div class="page-title">Проекты DDC</div>
+        <div id="projectsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px"></div>
+      </div>
+
+    </div><!-- /shell-content -->
+  </div><!-- /shell-main -->
+</div><!-- /portalShell -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  DDC EMPLOYEE PORTAL — Full standalone app
+// ═══════════════════════════════════════════════════════════
+
+// ── DATA ──────────────────────────────────────────────────
+
+const DEPT_META = {
+  cyber:{label:'Кибербезопасность',icon:'🛡️',color:'#f87171',bg:'rgba(248,113,113,0.1)'},
+  ai:{label:'AI Lab',icon:'🤖',color:'#60a5fa',bg:'rgba(96,165,250,0.1)'},
+  dev:{label:'Разработка',icon:'💻',color:'#a78bfa',bg:'rgba(167,139,250,0.1)'},
+  data:{label:'Data',icon:'📊',color:'#00d4aa',bg:'rgba(0,212,170,0.1)'},
+  cloud:{label:'Cloud / DevOps',icon:'☁️',color:'#fbbf24',bg:'rgba(251,191,36,0.1)'},
+  fintech:{label:'FinTech',icon:'💳',color:'#34d399',bg:'rgba(52,211,153,0.1)'},
+  mgmt:{label:'Управление',icon:'🎯',color:'#c084fc',bg:'rgba(192,132,252,0.1)'},
+};
+
+const BASE_EMPLOYEES = [
+  {name:'Алибек Сейткали',initials:'АС',email:'seit@ddc.kz',role:'Head of SOC / CISO',dept:'cyber',certs:['CISSP','OSCP','CEH'],projects:['Cyber Monitoring Center','SOC 24/7','Threat Intel Hub'],exp:'8 лет в ИБ',edu:'КазНТУ / CISSP 2019',bio:'Руководит SOC командой и всей информационной безопасностью DDC. Опыт в Threat Hunting и Red Team.',isBase:true},
+  {name:'Мадина Жаксыбекова',initials:'МЖ',email:'madina@ddc.kz',role:'Lead AI Engineer',dept:'ai',certs:['TensorFlow Dev','AWS ML'],projects:['BERT-kz NLP','Anomaly Detection','Gov AI Assistant'],exp:'6 лет в ML',edu:'НУ / Stanford Online',bio:'Лидирует разработку ML-моделей для нужд НБ РК. Автор BERT-kz.',isBase:true},
+  {name:'Данияр Ахметов',initials:'ДА',email:'dan@ddc.kz',role:'Senior Backend Developer',dept:'dev',certs:['Oracle Java','AWS Dev'],projects:['Digital Tenge Core','Open Banking API','Payment Gateway'],exp:'7 лет в Java',edu:'КБТУ / Oracle Certified',bio:'Разрабатывает ядро Digital Tenge и Open Banking платформу.',isBase:true},
+  {name:'Айгерим Нурланова',initials:'АН',email:'aigerim@ddc.kz',role:'Data Engineer',dept:'data',certs:['Databricks','Apache Kafka'],projects:['Data Platform KZ','Financial Analytics'],exp:'5 лет в Big Data',edu:'Databricks 2022',bio:'Строит дата-пайплайны и поддерживает аналитическую платформу.',isBase:true},
+  {name:'Санжар Бекжанов',initials:'СБ',email:'sanjar@ddc.kz',role:'DevSecOps Engineer',dept:'cloud',certs:['CKA','Terraform'],projects:['GovCloud Platform','K8s Migration'],exp:'5 лет в DevOps',edu:'Red Hat RHCE',bio:'Управляет кластерами Kubernetes и CI/CD инфраструктурой.',isBase:true},
+  {name:'Зауре Сапарова',initials:'ЗС',email:'zaure@ddc.kz',role:'FinTech Lead Engineer',dept:'fintech',certs:['PCI DSS','SWIFT Cert'],projects:['Digital Tenge CBDC','Open Banking','eKYC'],exp:'9 лет в FinTech',edu:'PCI QSA 2021',bio:'Руководит технической стороной CBDC и Open Banking интеграции.',isBase:true},
+  {name:'Нурлан Касымов',initials:'НК',email:'nurlank@ddc.kz',role:'SOC Analyst L3',dept:'cyber',certs:['GREM','CompTIA Sec+'],projects:['SOC Monitoring','Incident Response'],exp:'6 лет в SOC',edu:'GIAC 2020',bio:'Специалист по Threat Hunting и форензике.',isBase:true},
+  {name:'Тимур Сейдалин',initials:'ТС',email:'timur@ddc.kz',role:'Cloud Architect',dept:'cloud',certs:['AWS SA','RHCA'],projects:['GovCloud Design','DR Site'],exp:'10 лет в Cloud',edu:'AWS SA Pro',bio:'Проектирует облачную архитектуру государственных систем.',isBase:true},
+];
+
+const DEPT_SKILLS = {
+  cyber:[{n:'Threat Detection',v:95},{n:'Incident Response',v:90},{n:'SIEM/SOAR',v:87},{n:'Forensics',v:80},{n:'Red Team',v:72}],
+  ai:[{n:'Machine Learning',v:94},{n:'Deep Learning',v:89},{n:'NLP',v:87},{n:'Computer Vision',v:81},{n:'MLOps',v:75}],
+  dev:[{n:'Backend Dev',v:93},{n:'API Design',v:88},{n:'Databases',v:85},{n:'Microservices',v:80},{n:'Testing',v:73}],
+  data:[{n:'Data Engineering',v:92},{n:'SQL/NoSQL',v:88},{n:'Spark/Kafka',v:84},{n:'Visualization',v:77},{n:'ML Basics',v:69}],
+  cloud:[{n:'Kubernetes',v:93},{n:'Terraform',v:89},{n:'CI/CD',v:87},{n:'Monitoring',v:81},{n:'Security',v:77}],
+  fintech:[{n:'Payment Systems',v:96},{n:'PCI DSS',v:93},{n:'CBDC',v:90},{n:'Open Banking',v:87},{n:'Cryptography',v:81}],
+  mgmt:[{n:'Project Management',v:90},{n:'Agile/Scrum',v:86},{n:'Risk Management',v:82},{n:'Communication',v:88},{n:'Leadership',v:84}],
+};
+
+const DEPT_ACTIVITY = {
+  cyber:['✅ Закрыл инцидент INC-2847','📋 Обновил runbook для ransomware','🔍 Threat hunting: найдены IoC','📊 Еженедельный отчёт по угрозам'],
+  ai:['🤖 BERT-kz accuracy +2.3%','📚 Завершил курс LangChain','🔬 A/B тест anomaly detection','🚀 Задеплоил CV модель в staging'],
+  dev:['💻 Смёрджил PR #247: OB v2.1','⚡ Оптимизировал Digital Tenge БД','🔧 Исправил баг в auth-service','📝 Unit-тесты payment-gateway'],
+  data:['📊 Обновил Data Pipeline','🔄 Запустил ETL процесс','📈 Дашборд для НБ РК готов','💾 Партиционирование ClickHouse'],
+  cloud:['☁️ Мигрировал 3 сервиса на K8s','🔒 Обновил RBAC политики','🚀 ArgoCD для нового сервиса','📊 Grafana дашборды алертинга'],
+  fintech:['💳 Тестировал Digital Tenge сценарии','🔐 Аудит PCI DSS пройден','📋 Open Banking документация','🌐 Новый банк-партнёр подключён'],
+  mgmt:['📋 Sprint planning проведён','📊 Квартальный отчёт подготовлен','🤝 Встреча с НБ РК','📝 Дорожная карта Q3 обновлена'],
+};
+
+const ALL_COURSES = [
+  {id:'c1',icon:'🛡️',title:'SOC Analyst L2→L3: Advanced',type:'Курс',color:'#f87171',bg:'rgba(248,113,113,0.08)',duration:'24 ч',modules:8,dept:'cyber',desc:'SIEM, Threat Hunting, MITRE ATT&CK. Подготовка к GREM/GCFE.',
+   platform:'Coursera',url:'https://www.coursera.org/learn/ibm-cybersecurity-analyst',yt:'https://www.youtube.com/results?search_query=SOC+analyst+SIEM+threat+hunting'},
+  {id:'c2',icon:'🤖',title:'Machine Learning для финтеха',type:'Курс',color:'#60a5fa',bg:'rgba(96,165,250,0.08)',duration:'36 ч',modules:12,dept:'ai',desc:'Anomaly detection, Credit scoring, NLP для финансовых документов.',
+   platform:'Coursera',url:'https://www.coursera.org/specializations/machine-learning-introduction',yt:'https://www.youtube.com/results?search_query=machine+learning+fintech+anomaly+detection'},
+  {id:'c3',icon:'💎',title:'Digital Tenge: архитектура',type:'Вебинар',color:'#34d399',bg:'rgba(52,211,153,0.08)',duration:'4 ч',modules:1,dept:'fintech',desc:'CBDC, API, ISO 20022, PCI DSS Level 1 — технический обзор.',
+   platform:'YouTube',url:'https://www.youtube.com/results?search_query=CBDC+digital+currency+architecture+ISO+20022',yt:'https://www.youtube.com/results?search_query=CBDC+digital+tenge+national+bank'},
+  {id:'c4',icon:'☁️',title:'Kubernetes CKA подготовка',type:'Курс',color:'#fbbf24',bg:'rgba(251,191,36,0.08)',duration:'40 ч',modules:15,dept:'cloud',desc:'K8s architecture, Security, Networking. Подготовка к CKA.',
+   platform:'Udemy',url:'https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/',yt:'https://www.youtube.com/results?search_query=kubernetes+CKA+full+course'},
+  {id:'c5',icon:'📊',title:'Apache Kafka и Spark Streaming',type:'Мастер-класс',color:'#a78bfa',bg:'rgba(167,139,250,0.08)',duration:'12 ч',modules:4,dept:'data',desc:'Stream processing, Event-driven архитектура, ClickHouse.',
+   platform:'Udemy',url:'https://www.udemy.com/course/apache-kafka/',yt:'https://www.youtube.com/results?search_query=apache+kafka+spark+streaming+tutorial'},
+  {id:'c6',icon:'🔐',title:'PCI DSS для разработчиков',type:'Обязательный',color:'#f97316',bg:'rgba(249,115,22,0.08)',duration:'6 ч',modules:3,dept:'fintech',desc:'Требования PCI DSS Level 1. Обязательно для FinTech команды.',
+   platform:'LinkedIn Learning',url:'https://www.linkedin.com/learning/search?keywords=PCI+DSS',yt:'https://www.youtube.com/results?search_query=PCI+DSS+compliance+developer+guide'},
+  {id:'c7',icon:'🧠',title:'Казахский язык: технический',type:'Языковой',color:'#4ade80',bg:'rgba(74,222,128,0.08)',duration:'20 ч',modules:10,dept:'all',desc:'Деловая переписка и тех.документация на казахском.',
+   platform:'Duolingo / YouTube',url:'https://www.youtube.com/results?search_query=казахский+язык+онлайн+бесплатно',yt:'https://www.youtube.com/results?search_query=казахский+язык+урок+бесплатно'},
+  {id:'c8',icon:'🎯',title:'MITRE ATT&CK практикум',type:'Воркшоп',color:'#f87171',bg:'rgba(248,113,113,0.06)',duration:'8 ч',modules:3,dept:'cyber',desc:'Работа с матрицей ATT&CK, detection rules, threat emulation.',
+   platform:'AttackIQ Academy',url:'https://www.academy.attackiq.com/',yt:'https://www.youtube.com/results?search_query=MITRE+ATTCK+framework+tutorial'},
+  {id:'c9',icon:'📡',title:'Open Banking API интеграция',type:'Документация',color:'#60a5fa',bg:'rgba(96,165,250,0.06)',duration:'5 ч',modules:2,dept:'dev',desc:'ISO 20022, OAuth 2.0, OpenAPI 3.0. Гид разработчика DDC.',
+   platform:'MDN / YouTube',url:'https://www.youtube.com/results?search_query=open+banking+API+OAuth+2.0+tutorial',yt:'https://www.youtube.com/results?search_query=REST+API+OAuth2+OpenAPI+integration'},
+  {id:'c10',icon:'🔬',title:'LLM & RAG для enterprise',type:'Курс',color:'#a78bfa',bg:'rgba(167,139,250,0.08)',duration:'18 ч',modules:6,dept:'ai',desc:'LangChain, векторные БД, RAG pipeline для корпоративных задач.',
+   platform:'DeepLearning.AI',url:'https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/',yt:'https://www.youtube.com/results?search_query=LangChain+RAG+tutorial+LLM'},
+  {id:'c11',icon:'🏗️',title:'Microservices & DDD',type:'Курс',color:'#a78bfa',bg:'rgba(167,139,250,0.06)',duration:'28 ч',modules:9,dept:'dev',desc:'Domain-Driven Design, Event Sourcing, CQRS, gRPC.',
+   platform:'Udemy',url:'https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/',yt:'https://www.youtube.com/results?search_query=microservices+DDD+event+sourcing+CQRS'},
+  {id:'c12',icon:'🛡️',title:'Red Team операции',type:'Практикум',color:'#f87171',bg:'rgba(248,113,113,0.06)',duration:'16 ч',modules:5,dept:'cyber',desc:'Pentest, privilege escalation, lateral movement. CTF задания.',
+   platform:'TryHackMe',url:'https://tryhackme.com/path/outline/redteaming',yt:'https://www.youtube.com/results?search_query=red+team+penetration+testing+tutorial'},
+];
+
+const BOARD_DATA = [
+  {i:'ЖБМ',name:'Жаленов Бинур Муратович',role:'Председатель Совета директоров',title:'Заместитель Председателя НБ РК',tags:['MBA — New York University','FinTech — Cambridge','«Болашак»'],bio:'Окончил ЕНУ. Ранее — гендиректор КЦМР, председатель НПК. Руководит цифровой трансформацией НБ РК с 2024 года.',c:'#fbbf24',chief:true},
+  {i:'УАА',name:'Узбеков Асхат Архатович',role:'Член Совета директоров',title:'Директор Департамента ИТ НБ РК',tags:['IT НБ РК'],bio:'Руководит ИТ-инфраструктурой Национального Банка.',c:'#60a5fa'},
+  {i:'БДС',name:'Бейсекова Динара Серікқызы',role:'Член Совета директоров',title:'Директор юридического департамента НБ РК',tags:['Право','Корп. управление'],bio:'Правовое сопровождение деятельности ЦЦР.',c:'#a78bfa'},
+  {i:'НМА',name:'Нурмагамбетов Марат',role:'Независимый директор',title:'Эксперт по цифровой трансформации',tags:['Independent','FinTech Expert'],bio:'Международный опыт в финансовых технологиях.',c:'#34d399'},
+];
+const MGMT_DATA = [
+  {i:'АМА',name:'Амардинов Малик Алимжанович',role:'Председатель Правления (CEO)',c:'#00d4aa'},
+  {i:'КАБ',name:'Кенжебаев Асыл Бахтиярович',role:'Заместитель Председателя (COO)',c:'#60a5fa'},
+  {i:'МСН',name:'Мухамедиев Серик Нурланович',role:'Директор по технологиям (CTO)',c:'#a78bfa'},
+  {i:'ДСА',name:'Дуйсенова Салтанат Абаевна',role:'Директор по безопасности (CISO)',c:'#f87171'},
+];
+
+const NEWS_DATA = [
+  {icon:'🏆',title:'DDC запустил Concept ARM — матрицу угроз по MITRE ATT&CK',date:'18 июн 2026',color:'#f87171',text:'Новый инструмент позволяет визуализировать покрытие детектирования по всем 14 тактикам MITRE ATT&CK Enterprise в реальном времени.'},
+  {icon:'💎',title:'Digital Tenge преодолел 500K пользователей',date:'12 июн 2026',color:'#34d399',text:'CBDC платформа НБ РК достигла 500 000 активных кошельков. Оборот за май — ₸2.3 млрд. Запуск Open Banking интеграции запланирован на Q3 2026.'},
+  {icon:'🤖',title:'BERT-kz 2.0: точность NLU достигла 94%',date:'5 июн 2026',color:'#60a5fa',text:'Обновлённая языковая модель для казахского языка обучена на 25 ГБ корпусе. Инференс ускорен до 30 мс.'},
+  {icon:'🛡️',title:'Cyber Range 2026: 200 специалистов, 12 сценариев',date:'28 май 2026',color:'#a78bfa',text:'Прошли крупнейшие учения по кибербезопасности в истории Казахстана. Среднее время обнаружения атаки снизилось на 34%.'},
+  {icon:'📋',title:'Стратегия цифровой трансформации 2025–2029 утверждена',date:'15 май 2026',color:'#fbbf24',text:'НБ РК утвердил стратегию объединяющую все цифровые инициативы в концепцию единого цифрового национального банка.'},
+];
+
+const PROJECTS_DATA = [
+  {icon:'💎',name:'Digital Tenge (CBDC)',status:'active',kpis:['500K+ пользователей','₸2.3B/мес','99.99% uptime'],tech:['NestJS','Kafka','HSM','PCI DSS'],color:'#34d399'},
+  {icon:'🔗',name:'Open Banking API',status:'active',kpis:['12 банков','500+ эндп.','2M+ запросов/сут'],tech:['WSO2','OAuth 2.0','ISO 20022'],color:'#60a5fa'},
+  {icon:'🛡️',name:'Cyber Monitoring Center',status:'active',kpis:['2847 угроз/день','8.4 мин реакция','200+ систем'],tech:['Wazuh','Splunk','TheHive','MISP'],color:'#f87171'},
+  {icon:'🤖',name:'AI Analytics Platform',status:'dev',kpis:['1.2M AI-запр/сут','94% точность','18 AI-продуктов'],tech:['PyTorch','LangChain','BERT-kz','MLflow'],color:'#a78bfa'},
+  {icon:'🆔',name:'Digital Identity Platform',status:'active',kpis:['3.2M Digital ID','eKYC < 2мин','99.2% биометрия'],tech:['PKI','HSM','Biometrics','Keycloak'],color:'#fbbf24'},
+  {icon:'🏙️',name:'Smart City Platform',status:'active',kpis:['12K+ IoT узлов','8500 камер','240 перекрёстков'],tech:['MQTT','TensorFlow','YOLO v8'],color:'#4ade80'},
+];
+
+const CERTS_TEMPLATES = [
+  {name:'Корпоративная адаптация DDC',desc:'Пройдена программа онбординга',icon:'🏢',color:'#00d4aa',bg:'rgba(0,212,170,0.08)'},
+  {name:'PCI DSS Awareness',desc:'Осведомлённость о стандарте PCI DSS',icon:'🔐',color:'#fbbf24',bg:'rgba(251,191,36,0.08)'},
+  {name:'Кибергигиена 2025',desc:'Базовые правила информационной безопасности',icon:'🛡️',color:'#f87171',bg:'rgba(248,113,113,0.08)'},
+  {name:'Agile Fundamentals',desc:'Основы гибкой методологии разработки',icon:'🔄',color:'#a78bfa',bg:'rgba(167,139,250,0.08)'},
+];
+
+// ── STATE ──────────────────────────────────────────────────
+
+let currentUser = null;
+let completedCourses = [];
+let authMode = 'login';
+
+function getUsers() { return JSON.parse(localStorage.getItem('ddc_users')||'[]'); }
+function saveUsers(u) { localStorage.setItem('ddc_users',JSON.stringify(u)); }
+function getCompleted() { return JSON.parse(localStorage.getItem(`ddc_courses_${currentUser?.email}`)||'[]'); }
+function saveCompleted(c) { localStorage.setItem(`ddc_courses_${currentUser?.email}`,JSON.stringify(c)); }
+
+// Seed base employees
+function seedUsers() {
+  let users = getUsers();
+  BASE_EMPLOYEES.forEach(emp => {
+    if(!users.find(u=>u.email===emp.email)) {
+      users.push({...emp, password:'ddc2024', registered: new Date().toISOString()});
+    }
+  });
+  saveUsers(users);
+}
+
+// ── AUTH ──────────────────────────────────────────────────
+
+function switchAuthTab(mode) {
+  authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach((b,i)=>b.classList.toggle('active', (i===0&&mode==='login')||(i===1&&mode==='register')));
+  document.getElementById('loginForm').style.display = mode==='login'?'block':'none';
+  document.getElementById('registerForm').style.display = mode==='register'?'block':'none';
+}
+
+function togglePass(id, btn) {
+  const inp = document.getElementById(id);
+  inp.type = inp.type==='password'?'text':'password';
+  btn.textContent = inp.type==='password'?'👁':'🙈';
+}
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const users = getUsers();
+  const user = users.find(u=>u.email.toLowerCase()===email && u.password===pass);
+  if(user) { loginUser(user); }
+  else { document.getElementById('loginErr').style.display='block'; }
+}
+
+function quickLoginDemo(idx) {
+  const users = getUsers();
+  const emp = BASE_EMPLOYEES[idx];
+  const user = users.find(u=>u.email===emp.email);
+  if(user) loginUser(user);
+}
+
+function doRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const dept = document.getElementById('regDept').value;
+  const role = document.getElementById('regRole').value.trim();
+  const pass = document.getElementById('regPass').value;
+  const err = document.getElementById('regErr');
+  const ok = document.getElementById('regOk');
+  if(!name||!email||!dept||!role||pass.length<6) { err.style.display='block'; return; }
+  err.style.display='none';
+  let users = getUsers();
+  if(users.find(u=>u.email===email)) { err.textContent='Этот email уже зарегистрирован'; err.style.display='block'; return; }
+  const words = name.trim().split(' ');
+  const initials = words.slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
+  const newUser = {name, email, dept, role, pass, password:pass, initials, certs:[], projects:[], exp:'Новый сотрудник', edu:'', bio:'', registered:new Date().toISOString()};
+  users.push(newUser);
+  saveUsers(users);
+  ok.style.display='block';
+  setTimeout(()=>loginUser(newUser), 1000);
+}
+
+function loginUser(user) {
+  currentUser = user;
+  completedCourses = getCompleted();
+  document.getElementById('authScreen').style.display='none';
+  document.getElementById('portalShell').style.display='block';
+  initPortal();
+}
+
+function doLogout() {
+  currentUser = null;
+  document.getElementById('portalShell').style.display='none';
+  document.getElementById('authScreen').style.display='flex';
+  document.getElementById('loginEmail').value='';
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginErr').style.display='none';
+}
+
+// ── PORTAL INIT ──────────────────────────────────────────
+
+function initPortal() {
+  // topbar
+  const av = document.getElementById('topbarAv');
+  av.textContent = currentUser.initials||currentUser.name.charAt(0);
+  av.style.background = deptGrad(currentUser.dept);
+
+  // aside user
+  const dm = DEPT_META[currentUser.dept]||{label:currentUser.dept,color:'#60a5fa',bg:'rgba(96,165,250,0.1)'};
+  document.getElementById('asideUser').innerHTML = `
+    <div class="aside-avatar" style="background:${deptGrad(currentUser.dept)}">${currentUser.initials||currentUser.name.charAt(0)}</div>
+    <div><div class="aside-uname">${currentUser.name}</div><div class="aside-urole">${dm.label}</div></div>`;
+
+  // topbar date
+  const now = new Date();
+  document.getElementById('topbarDate').textContent = now.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('welcomeTime').textContent = 'Вход: '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+
+  renderDashboard();
+  renderColleagues('all');
+  renderOrgDepts();
+  renderBoard();
+  renderCourses('all');
+  renderCerts();
+  renderNews();
+  renderProjects();
+  renderProfile();
+}
+
+function deptGrad(dept) {
+  const map = {cyber:'linear-gradient(135deg,#f87171,#dc2626)',ai:'linear-gradient(135deg,#60a5fa,#3b82f6)',dev:'linear-gradient(135deg,#a78bfa,#7c3aed)',data:'linear-gradient(135deg,#00d4aa,#0891b2)',cloud:'linear-gradient(135deg,#fbbf24,#d97706)',fintech:'linear-gradient(135deg,#34d399,#059669)',mgmt:'linear-gradient(135deg,#c084fc,#9333ea)'};
+  return map[dept]||'linear-gradient(135deg,#60a5fa,#3b82f6)';
+}
+
+// ── PAGE NAVIGATION ──────────────────────────────────────
+
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(el) el.classList.add('active');
+  const titles={dashboard:'Главная',profile:'Мой профиль',colleagues:'Коллеги',org:'Структура',board:'Совет директоров',courses:'Учебные курсы',certifications:'Сертификаты',news:'Новости',projects:'Проекты'};
+  document.getElementById('topbarTitle').textContent=titles[id]||id;
+}
+
+function toggleMenu() {
+  document.getElementById('shellAside').classList.toggle('open');
+}
+
+// ── DASHBOARD ────────────────────────────────────────────
+
+function renderDashboard() {
+  completedCourses = getCompleted();
+  const dm = DEPT_META[currentUser.dept]||{label:'DDC',color:'#60a5fa'};
+  document.getElementById('welcomeName').textContent = currentUser.name;
+  document.getElementById('welcomeRole').textContent = currentUser.role+' · '+dm.label;
+  document.getElementById('kpiCourses').textContent = completedCourses.length;
+  document.getElementById('kpiCerts').textContent = (currentUser.certs||[]).length + completedCourses.length;
+  document.getElementById('kpiProjects').textContent = (currentUser.projects||[]).length||3;
+
+  const pct = Math.round(completedCourses.length/ALL_COURSES.length*100);
+  document.getElementById('progressPct').textContent = pct+'%';
+  document.getElementById('progressBar').style.width = pct+'%';
+
+  // next courses
+  const next = ALL_COURSES.filter(c=>!completedCourses.includes(c.id)).slice(0,3);
+  document.getElementById('nextCourses').innerHTML = next.map(c=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:8px">
+      <span style="font-size:18px">${c.icon}</span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:600">${c.title}</div><div style="font-size:10px;color:var(--dim)">${c.duration} · ${c.modules} модулей</div></div>
+      ${c.url?`<a href="${c.url}" target="_blank" rel="noopener" onclick="markStarted('${c.id}')" style="background:${c.bg};color:${c.color};border:1px solid ${c.color}44;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-weight:600;text-decoration:none">Начать →</a>`:''}
+    </div>`).join('');
+
+  // activity
+  const acts = DEPT_ACTIVITY[currentUser.dept]||[];
+  document.getElementById('dashActivity').innerHTML = acts.map(a=>`
+    <div class="feed-item">
+      <div class="feed-dot" style="background:${(DEPT_META[currentUser.dept]||{color:'#60a5fa'}).color}"></div>
+      <div style="font-size:13px;color:var(--muted)">${a}</div>
+    </div>`).join('');
+
+  // colleagues online (3 random)
+  const users = getUsers().filter(u=>u.email!==currentUser.email).slice(0,6);
+  document.getElementById('dashColleagues').innerHTML = users.map(u=>{
+    const dm2 = DEPT_META[u.dept]||{color:'#60a5fa',label:'DDC'};
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer" onclick="showPage('colleagues',document.querySelector('.nav-item:nth-child(5)'))">
+      <div style="width:44px;height:44px;border-radius:12px;background:${deptGrad(u.dept)};display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#fff;position:relative">
+        ${u.initials||u.name.charAt(0)}
+        <div style="position:absolute;bottom:-2px;right:-2px;width:10px;height:10px;background:${Math.random()>.3?'#4ade80':'#6b7280'};border-radius:50%;border:2px solid var(--card)"></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;max-width:60px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${u.name.split(' ')[0]}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── PROFILE ──────────────────────────────────────────────
+
+function renderProfile() {
+  const u = currentUser;
+  const dm = DEPT_META[u.dept]||{label:'DDC',color:'#60a5fa',bg:'rgba(96,165,250,0.1)'};
+  document.getElementById('profileTitle').textContent = u.name;
+  ['profAv'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=u.initials||u.name.charAt(0);el.style.background=deptGrad(u.dept);}});
+  document.getElementById('profName').textContent = u.name;
+  document.getElementById('profRole').textContent = u.role||'Сотрудник DDC';
+  document.getElementById('profDept').textContent = dm.label+' · '+u.exp;
+  document.getElementById('profCourseCount').textContent = getCompleted().length;
+  document.getElementById('profCerts').innerHTML = (u.certs||[]).map(c=>`<span class="tag" style="background:rgba(0,212,170,0.1);color:var(--teal);border:1px solid rgba(0,212,170,0.2)">${c}</span>`).join('');
+  document.getElementById('editName').value = u.name;
+  document.getElementById('editRole').value = u.role||'';
+  document.getElementById('editBio').value = u.bio||'';
+
+  const skills = DEPT_SKILLS[u.dept]||DEPT_SKILLS.dev;
+  document.getElementById('profSkills').innerHTML = skills.map(s=>`
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:12px">
+        <span style="color:var(--muted)">${s.n}</span>
+        <span style="font-weight:700;color:${dm.color}">${s.v}</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:${s.v}%;background:${deptGrad(u.dept)}"></div></div>
+    </div>`).join('');
+
+  const projs = u.projects||['Digital Tenge Core','Open Banking API','SOC Platform'];
+  document.getElementById('profProjects').innerHTML = projs.map(p=>`
+    <div style="background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px">📁</span>
+      <div><div style="font-size:13px;font-weight:600">${p}</div><div style="font-size:11px;color:var(--dim)">Активный участник</div></div>
+      <span style="margin-left:auto;background:rgba(74,222,128,0.1);color:#4ade80;border-radius:5px;padding:2px 8px;font-size:10px;font-weight:700">Active</span>
+    </div>`).join('');
+}
+
+function saveProfile() {
+  const name = document.getElementById('editName').value.trim();
+  const role = document.getElementById('editRole').value.trim();
+  const bio = document.getElementById('editBio').value.trim();
+  if(!name) return;
+  let users = getUsers();
+  const idx = users.findIndex(u=>u.email===currentUser.email);
+  if(idx>=0){users[idx].name=name;users[idx].role=role;users[idx].bio=bio;saveUsers(users);}
+  currentUser.name=name; currentUser.role=role; currentUser.bio=bio;
+  renderProfile();
+  document.getElementById('asideUser').querySelector('.aside-uname').textContent=name;
+  showToast('✅ Профиль сохранён');
+}
+
+// ── COLLEAGUES ───────────────────────────────────────────
+
+function renderColleagues(filter) {
+  const users = getUsers();
+  const list = filter==='all'?users:users.filter(u=>u.dept===filter);
+  document.getElementById('colleaguesGrid').innerHTML = list.map(u=>{
+    const dm = DEPT_META[u.dept]||{label:'DDC',color:'#60a5fa',bg:'rgba(96,165,250,0.1)'};
+    const isMe = u.email===currentUser.email;
+    return `<div class="colleague-card" style="${isMe?'border-color:rgba(0,212,170,0.4)':''}">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:46px;height:46px;border-radius:13px;background:${deptGrad(u.dept)};display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#fff;flex-shrink:0">${u.initials||u.name.charAt(0)}</div>
+        <div>
+          <div style="font-size:13px;font-weight:700">${u.name}${isMe?' <span style="font-size:9px;background:rgba(0,212,170,0.15);color:var(--teal);border-radius:4px;padding:1px 5px">Вы</span>':''}</div>
+          <div style="font-size:11px;color:${dm.color};font-weight:600">${u.role||'Сотрудник'}</div>
+        </div>
+      </div>
+      <span class="dept-pill" style="background:${dm.bg};color:${dm.color}">${dm.icon} ${dm.label}</span>
+      ${u.bio?`<p style="font-size:11px;color:var(--dim);margin-top:8px;line-height:1.5">${u.bio}</p>`:''}
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px">${(u.certs||[]).slice(0,3).map(c=>`<span style="background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:5px;padding:2px 7px;font-size:10px;color:var(--muted)">${c}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+
+  // filter buttons
+  const fb = document.getElementById('deptFilterBtns');
+  if(!fb.hasChildNodes()){
+    const depts=['all',...Object.keys(DEPT_META)];
+    fb.innerHTML=depts.map(d=>`<button onclick="renderColleagues('${d}');document.querySelectorAll('#deptFilterBtns button').forEach(b=>{b.style.background='transparent';b.style.color='var(--muted)'});this.style.background='rgba(59,130,246,0.1)';this.style.color='var(--blue2)'" style="padding:6px 14px;border-radius:7px;font-size:12px;border:1px solid var(--border);background:${d===filter?'rgba(59,130,246,0.1)':'transparent'};color:${d===filter?'var(--blue2)':'var(--muted)'};cursor:pointer">${d==='all'?'👥 Все':DEPT_META[d]?.icon+' '+DEPT_META[d]?.label}</button>`).join('');
+  }
+}
+
+// ── ORG CHART ────────────────────────────────────────────
+
+function renderOrgDepts() {
+  document.getElementById('orgDeptGrid').innerHTML = Object.entries(DEPT_META).map(([k,dm])=>{
+    const cnt = getUsers().filter(u=>u.dept===k).length;
+    return `<div class="org-box" onclick="filterOrgDept('${k}',this)">
+      <div style="font-size:22px;margin-bottom:6px">${dm.icon}</div>
+      <div style="font-size:12px;font-weight:700">${dm.label}</div>
+      <div style="font-size:11px;color:${dm.color};font-weight:700;margin-top:4px">${cnt} сотр.</div>
+    </div>`;
+  }).join('');
+}
+
+function filterOrgDept(dept, el) {
+  document.querySelectorAll('.org-box').forEach(b=>b.classList.remove('selected'));
+  if(el) el.classList.add('selected');
+  const dm = DEPT_META[dept]||{label:dept};
+  document.getElementById('orgDeptLabel').textContent = dm.icon+' '+dm.label;
+  const list = getUsers().filter(u=>u.dept===dept);
+  document.getElementById('orgEmpGrid').innerHTML = list.map(u=>{
+    const d=DEPT_META[u.dept]||{color:'#60a5fa'};
+    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px">
+      <div style="width:40px;height:40px;border-radius:11px;background:${deptGrad(u.dept)};display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;color:#fff;flex-shrink:0">${u.initials||u.name.charAt(0)}</div>
+      <div><div style="font-size:13px;font-weight:700">${u.name}</div><div style="font-size:11px;color:${d.color}">${u.role||'Сотрудник'}</div></div>
+    </div>`;
+  }).join('');
+}
+
+// ── BOARD ────────────────────────────────────────────────
+
+function renderBoard() {
+  document.getElementById('boardGrid').innerHTML = BOARD_DATA.map(m=>`
+    <div class="board-card" style="${m.chief?'border-color:rgba(251,191,36,0.3)':''}">
+      <div class="board-av" style="background:linear-gradient(135deg,${m.c}88,${m.c}44)">${m.i}</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+          <span style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:800">${m.name}</span>
+          ${m.chief?'<span style="background:rgba(251,191,36,0.12);color:#fbbf24;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700">Председатель</span>':''}
+        </div>
+        <div style="font-size:13px;color:${m.c};font-weight:600;margin-bottom:3px">${m.role}</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px">${m.title}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${m.tags.map(t=>`<span style="background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:5px;padding:2px 8px;font-size:10px;color:var(--muted)">${t}</span>`).join('')}</div>
+        <p style="font-size:12px;color:var(--dim);line-height:1.6">${m.bio}</p>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('mgmtGrid').innerHTML = MGMT_DATA.map(m=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px">
+      <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,${m.c}88,${m.c}44);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#fff">${m.i}</div>
+      <div><div style="font-size:13px;font-weight:700">${m.name}</div><div style="font-size:12px;color:${m.c}">${m.role}</div></div>
+    </div>`).join('');
+}
+
+// ── COURSES ──────────────────────────────────────────────
+
+function renderCourses(filter) {
+  completedCourses = getCompleted();
+  const list = filter==='all'?ALL_COURSES:ALL_COURSES.filter(c=>c.dept===filter||c.dept==='all');
+  document.getElementById('coursesGrid').innerHTML = list.map(c=>{
+    const done = completedCourses.includes(c.id);
+    return `<div class="course-card" style="position:relative;${done?'border-color:rgba(74,222,128,0.3)':''}">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${done?'linear-gradient(90deg,#4ade80,#34d399)':'transparent'};border-radius:3px 3px 0 0"></div>
+      <div style="display:flex;align-items:start;gap:12px">
+        <div style="width:48px;height:48px;border-radius:13px;background:${c.bg};display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${c.icon}</div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px">${c.title}</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;align-items:center">
+            <span class="course-badge" style="background:${c.bg};color:${c.color}">${c.type}</span>
+            <span style="font-size:10px;color:var(--dim)">⏱ ${c.duration} · ${c.modules} модулей</span>
+            ${c.platform?`<span style="font-size:10px;color:var(--dim);background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:5px;padding:2px 7px">${c.platform}</span>`:''}
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:14px">${c.desc}</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            ${c.url?`<a href="${c.url}" target="_blank" rel="noopener" onclick="markStarted('${c.id}')" style="background:${done?'rgba(74,222,128,0.1)':'var(--grad)'};color:${done?'#4ade80':'#fff'};border:${done?'1px solid rgba(74,222,128,0.3)':'none'};border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+              ${done?'✅ Пройдено':'▶ Начать обучение'}
+            </a>`:''}
+            ${c.yt?`<a href="${c.yt}" target="_blank" rel="noopener" style="background:rgba(255,0,0,0.1);color:#f87171;border:1px solid rgba(255,0,0,0.2);border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px">▶ YouTube</a>`:''}
+            ${done?'':`<button onclick="toggleCourse('${c.id}')" style="background:transparent;color:var(--dim);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;font-size:11px;cursor:pointer">✓ Отметить</button>`}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // filter buttons
+  const fb = document.getElementById('courseFilterBtns');
+  if(!fb.hasChildNodes()){
+    const types=['all',...Object.keys(DEPT_META),'all'];
+    fb.innerHTML=`<button onclick="renderCourses('all');setActiveCFBtn(this)" style="padding:6px 14px;border-radius:7px;font-size:12px;border:1px solid rgba(59,130,246,0.4);background:rgba(59,130,246,0.1);color:var(--blue2);cursor:pointer">Все курсы</button>
+    ${Object.entries(DEPT_META).map(([k,dm])=>`<button onclick="renderCourses('${k}');setActiveCFBtn(this)" style="padding:6px 14px;border-radius:7px;font-size:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">${dm.icon} ${dm.label}</button>`).join('')}`;
+  }
+  document.getElementById('badgeCourses').textContent = ALL_COURSES.length - completedCourses.length;
+}
+
+function setActiveCFBtn(b){document.querySelectorAll('#courseFilterBtns button').forEach(x=>{x.style.background='transparent';x.style.color='var(--muted)';x.style.borderColor='var(--border)'});b.style.background='rgba(59,130,246,0.1)';b.style.color='var(--blue2)';b.style.borderColor='rgba(59,130,246,0.4)';}
+
+function toggleCourse(id) {
+  completedCourses = getCompleted();
+  if(completedCourses.includes(id)) completedCourses=completedCourses.filter(c=>c!==id);
+  else { completedCourses.push(id); showToast('🎉 Курс отмечен как пройденный!'); }
+  saveCompleted(completedCourses);
+  renderCourses('all');
+  renderDashboard();
+  renderCerts();
+}
+
+function markStarted(id) {
+  // Auto-mark as started but not completed — just track
+  let started = JSON.parse(localStorage.getItem(`ddc_started_${currentUser?.email}`)||'[]');
+  if(!started.includes(id)) { started.push(id); localStorage.setItem(`ddc_started_${currentUser?.email}`, JSON.stringify(started)); }
+  showToast('🚀 Открываем курс...');
+}
+
+// ── CERTS ────────────────────────────────────────────────
+
+function renderCerts() {
+  completedCourses = getCompleted();
+  const earned = [...(currentUser.certs||[]).map((c,i)=>({name:c,desc:'Профессиональный сертификат',icon:'🏆',color:'#fbbf24',bg:'rgba(251,191,36,0.08)',date:'—'})), ...CERTS_TEMPLATES.slice(0, Math.min(completedCourses.length+1,CERTS_TEMPLATES.length))];
+  document.getElementById('certsGrid').innerHTML = earned.length?earned.map(c=>`
+    <div style="background:var(--card);border:1px solid rgba(251,191,36,0.2);border-radius:16px;padding:22px;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">${c.icon}</div>
+      <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:16px;margin-bottom:6px">${c.name}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">${c.desc}</div>
+      <span style="background:rgba(251,191,36,0.1);color:#fbbf24;border-radius:7px;padding:4px 12px;font-size:11px;font-weight:700">Получен ✓</span>
+    </div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--dim)">Пройдите курсы, чтобы получить сертификаты 🎓</div>`;
+}
+
+// ── NEWS ─────────────────────────────────────────────────
+
+function renderNews() {
+  document.getElementById('newsGrid').innerHTML = NEWS_DATA.map(n=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;gap:16px;align-items:start">
+      <div style="width:48px;height:48px;border-radius:13px;background:${n.color}18;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">${n.icon}</div>
+      <div>
+        <div style="font-size:11px;color:var(--dim);margin-bottom:5px">${n.date}</div>
+        <div style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px">${n.title}</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">${n.text}</p>
+      </div>
+    </div>`).join('');
+}
+
+// ── PROJECTS ─────────────────────────────────────────────
+
+function renderProjects() {
+  document.getElementById('projectsGrid').innerHTML = PROJECTS_DATA.map(p=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+        <div style="font-size:28px">${p.icon}</div>
+        <div>
+          <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px">${p.name}</div>
+          <span style="background:${p.status==='active'?'rgba(74,222,128,0.1)':'rgba(251,191,36,0.1)'};color:${p.status==='active'?'#4ade80':'#fbbf24'};border-radius:5px;padding:2px 8px;font-size:10px;font-weight:700">${p.status==='active'?'Active':'In Dev'}</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+        ${p.kpis.map(k=>`<div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:8px;font-size:11px;color:${p.color};font-weight:700">${k}</div>`).join('')}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">${p.tech.map(t=>`<span style="background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:5px;padding:2px 7px;font-size:10px;color:var(--dim)">${t}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+// ── TOAST ────────────────────────────────────────────────
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display='block';
+  setTimeout(()=>t.style.display='none', 2500);
+}
+
+// ── DEMO USERS RENDER ────────────────────────────────────
+
+function renderDemoUsers() {
+  const demos = BASE_EMPLOYEES.slice(0,4);
+  document.getElementById('demoUsers').innerHTML = demos.map((e,i)=>`
+    <button class="demo-user-btn" onclick="quickLoginDemo(${i})">
+      <div class="demo-user-name">${e.name.split(' ').slice(0,2).join(' ')}</div>
+      <div class="demo-user-role">${e.role}</div>
+    </button>`).join('');
+}
+
+// ── INIT ─────────────────────────────────────────────────
+
+seedUsers();
+renderDemoUsers();
+</script>
+</body>
+</html>

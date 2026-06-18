@@ -1,0 +1,61 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Связаться с нами</div>
+    <h1 data-ru="Контакты" data-kz="Байланыс" data-en="Contacts">Контакты</h1>
+    <p data-ru="Готовы обсудить цифровые проекты, партнёрство или вакансии" data-kz="Цифрлық жобалар, серіктестік немесе вакансиялар туралы талқылауға дайынбыз" data-en="Ready to discuss digital projects, partnership or vacancies">Готовы обсудить цифровые проекты, партнёрство или вакансии</p>
+  </div>
+  
+  <div class="page-content">
+    <div class="section-wrap">
+    <div class="section-hd">
+      <div class="eyebrow" data-i18n="conLabel">Обратная связь</div>
+      <h2 class="title" data-i18n="conTitle">Связаться с нами</h2>
+      <div class="divider"></div>
+      <p class="subtitle" data-i18n="conSub">Готовы обсудить цифровые проекты, партнёрство или вакансии</p>
+    </div>
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <div class="contact-info-item"><div class="contact-info-icon">📍</div><div><div class="contact-info-label" data-i18n="conAddrL">Адрес</div><div class="contact-info-val" data-i18n="conAddr">г. Астана, пр. Мәңгілік Ел, 55/1</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">📞</div><div><div class="contact-info-label" data-i18n="conPhoneL">Телефон</div><div class="contact-info-val">+7 (7172) 55-00-00</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">📧</div><div><div class="contact-info-label" data-i18n="conEmailL">Email</div><div class="contact-info-val">info@ddc.gov.kz</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">🕐</div><div><div class="contact-info-label" data-i18n="conHoursL">Режим работы</div><div class="contact-info-val" data-i18n="conHours">Пн–Пт, 09:00–18:00 · SOC 24/7</div></div></div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-top:8px">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:12px" data-i18n="conFollowTitle">Мы в социальных сетях</h4>
+          <div style="display:flex;gap:10px">
+            <a href="#" class="btn btn-outline" style="font-size:12px;padding:8px 14px">LinkedIn</a>
+            <a href="#" class="btn btn-outline" style="font-size:12px;padding:8px 14px">Telegram</a>
+            <a href="#" class="btn btn-outline" style="font-size:12px;padding:8px 14px">Twitter</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cf-row" style="margin-bottom:16px">
+          <div class="cf-group" style="margin:0"><label class="cf-label" data-i18n="cfName">Имя</label><input class="cf-input" id="cf_name" type="text" data-ph="cfNamePh" placeholder="Ваше имя"></div>
+          <div class="cf-group" style="margin:0"><label class="cf-label" data-i18n="cfCompany">Компания</label><input class="cf-input" id="cf_company" type="text" data-ph="cfCompanyPh" placeholder="Организация"></div>
+        </div>
+        <div class="cf-group"><label class="cf-label">Email *</label><input class="cf-input" id="cf_email" type="email" placeholder="your@email.com"></div>
+        <div class="cf-group"><label class="cf-label" data-i18n="cfPhone">Телефон</label><input class="cf-input" id="cf_phone" type="tel" data-ph="cfPhonePh" placeholder="+7 (___) ___-__-__" oninput="phoneMask(this)"></div>
+        <div class="cf-group">
+          <label class="cf-label" data-i18n="cfTopic">Тема обращения</label>
+          <select class="cf-input" id="cf_topic">
+            <option value="" data-i18n="cfTopicDef">Выберите тему...</option>
+            <option value="Кибербезопасность" data-i18n="cfT1">Кибербезопасность</option>
+            <option value="Аналитика данных" data-i18n="cfT2">Аналитика данных</option>
+            <option value="Финансовые технологии" data-i18n="cfT3">Финансовые технологии</option>
+            <option value="Партнёрство" data-i18n="cfT4">Партнёрство</option>
+            <option value="Карьера" data-i18n="cfT5">Карьера / Вакансия</option>
+            <option value="Другое" data-i18n="cfT6">Другое</option>
+          </select>
+        </div>
+        <div class="cf-group"><label class="cf-label" data-i18n="cfMsg">Сообщение *</label><textarea class="cf-input" id="cf_msg" data-ph="cfMsgPh" placeholder="Опишите ваш запрос..."></textarea></div>
+        <button class="btn-submit" id="cfBtn" onclick="submitForm()">
+          <span id="cfBtnText" data-i18n="cfSend">Отправить сообщение →</span>
+          <span class="spin" id="cfSpin"></span>
+        </button>
+        <div class="cf-success" id="cfSuccess">✅ <span data-i18n="cfOk">Заявка отправлена! Свяжемся в течение 1 рабочего дня.</span></div>
+        <div class="cf-err-msg" id="cfErrMsg"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>

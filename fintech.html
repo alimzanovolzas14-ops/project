@@ -1,0 +1,45 @@
+<main style="min-height:80vh">
+<div class="page-hero">
+    <div class="page-hero-eyebrow">Финансовые технологии</div>
+    <h1 data-ru="FinTech & Digital Tenge" data-kz="FinTech & Digital Tenge" data-en="FinTech & Digital Tenge">FinTech & Digital Tenge</h1>
+    <p data-ru="CBDC, Open Banking API, платёжная инфраструктура и финансовые сервисы Казахстана" data-kz="CBDC, Open Banking API, Қазақстанның төлем инфрақұрылымы мен қаржылық қызметтері" data-en="CBDC, Open Banking API, payment infrastructure and financial services of Kazakhstan">CBDC, Open Banking API, платёжная инфраструктура и финансовые сервисы Казахстана</p>
+  </div>
+  
+  <div class="page-content">
+    <div style="max-width:1280px;margin:0 auto;padding:0 48px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+      <!-- SOC Terminal -->
+      <div class="reveal">
+        <div class="eyebrow">Live SOC</div>
+        <h2 class="title" style="margin-bottom:8px">Security Terminal</h2>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Поток событий безопасности в реальном времени</p>
+        <div class="terminal-wrap">
+          <div class="terminal-header">
+            <div class="term-dot" style="background:#f87171"></div>
+            <div class="term-dot" style="background:#fbbf24"></div>
+            <div class="term-dot" style="background:#4ade80"></div>
+            <span style="margin-left:8px;font-size:12px;color:rgba(255,255,255,0.5)">soc@ddc-kz:~$ monitor --live</span>
+          </div>
+          <div class="terminal-body" id="termBody"></div>
+        </div>
+      </div>
+      <!-- Digital Tenge Dashboard -->
+      <div class="reveal">
+        <div class="eyebrow">FinTech</div>
+        <h2 class="title" style="margin-bottom:8px">Digital Tenge Live</h2>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Статистика цифрового тенге в реальном времени</p>
+        <div class="tenge-dash">
+          <div class="tenge-kpi"><div class="tenge-val" id="tengeUsers">500,241</div><div class="tenge-lbl">Пользователей</div><div class="tenge-trend" style="color:var(--green)">↑ +124 сегодня</div></div>
+          <div class="tenge-kpi"><div class="tenge-val" id="tengeTx">₸ 2.3B</div><div class="tenge-lbl">Оборот / мес</div><div class="tenge-trend" style="color:var(--green)">↑ +3.2%</div></div>
+          <div class="tenge-kpi"><div class="tenge-val" id="tengeTps">847</div><div class="tenge-lbl">Транзакций / сек</div><div class="tenge-trend" style="color:var(--teal-l)">● Live</div></div>
+          <div class="tenge-kpi"><div class="tenge-val" id="tengeMs">0.8s</div><div class="tenge-lbl">Скорость платежа</div><div class="tenge-trend" style="color:var(--green)">↓ -12ms</div></div>
+        </div>
+        <div class="tenge-chart-wrap">
+          <div style="font-size:12px;font-weight:700;color:var(--teal-l);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px">Активность транзакций — 24ч</div>
+          <canvas id="tengeChart" height="110"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>
